@@ -1,0 +1,72 @@
+<template>
+<div class="g-doc">
+    <div class="g-hd">
+        <About></About>
+        <div v-if="visit" class="box menu">
+            <div class="m-sch">
+                <input @keyup.enter="search($event)" id="search_content" class="sch" type="text" name="q" placeholder="记得按回车哦" />
+            </div>
+            <div class="m-nav">
+                <ul class="menuOpen">
+                    <li class="tag-all"><a v-link="{ name: 'index', exact: true}"><i></i>All</a></li>
+                    <li class="tag-life"><a v-link="{ name: 'category', params: { id: 1 }}"><i></i>Life</a></li>
+                    <li class="tag-study"><a v-link="{ name: 'category', params: { id: 2 }}"><i></i>Study</a></li>
+                    <li class="tag-other"><a v-link="{ name: 'category', params: { id: 3 }}"><i></i>Other</a></li>
+                </ul>
+            </div>
+        </div>
+        <div v-if="!visit" class="box menu">
+            <div class="m-nav">
+                <ul class="menuOpen">
+                    <li class="tag-all"><a v-link="{ name: 'index', exact: true}"><i></i>All</a></li>
+                    <li class="tag-life"><a v-link="{ name: 'adminList', params: { page: 1 }}"><i></i>List</a></li>
+                    <li class="tag-study"><a v-link="{ name: 'adminPost'}"><i></i>Post</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <router-view class="router" transition="app" transition-mode="out-in"></router-view>
+    <div class="g-ft"><span title="Copyright">©</span> <a v-link="{ name: 'index', exact: true, activeClass: 'none'}">M·M·F 小屋</a> 2016.06.01</div>
+    <Toaster></Toaster>
+    <div v-if="global.loading" class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+</template>
+<script type="text/ecmascript-6">
+    import '../html/css/style.css'
+    import '../html/css/simditor.css'
+    import '../html/css/hljs/googlecode.css'
+    import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
+    import store from './store'
+    import Toaster from './components/app/toaster.vue'
+    import About from './components/about.vue'
+    export default {
+        vuex: {
+            getters: {
+                global: ({ global }) => global
+            }
+        },
+        store,
+        components: {
+            Toaster,
+            About
+        },
+        computed: {
+            visit() {
+                return this.$route.name == 'index' || this.$route.name == 'article' || this.$route.name == 'category' || this.$route.name == 'search'
+            }
+        },
+        methods: {
+            search(e) {
+                var q = e.target.value
+                if (q == "") {
+                    return false
+                } else {
+                    this.$route.router.go({ name: 'search', params: { q: q }})
+                }
+            }
+        }
+    }
+</script>
