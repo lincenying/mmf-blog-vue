@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <router-view class="router" transition="app" transition-mode="out-in"></router-view>
+    <router-view class="router" transition="fade" transition-mode="out-in"></router-view>
     <div class="g-ft"><span title="Copyright">©</span> <a v-link="{ name: 'index', exact: true, activeClass: 'none'}">M·M·F 小屋</a> 2016.06.01</div>
     <Toaster></Toaster>
     <div v-if="global.loading" class="spinner">
@@ -70,3 +70,21 @@
         }
     }
 </script>
+<style>
+    .router.app-transition,
+    .fade-transition {
+        transition: opacity 0.3s ease;
+    }
+    .router.app-enter,
+    .router.app-leave {
+        opacity: 0;
+    }
+    .fade-enter {
+        opacity: 1;
+        transform: translate3d(100%, 0, 0);
+    }
+    .fade-leave {
+        opacity: 0;
+        transform: translate3d(0, 0, 0);
+    }
+</style>

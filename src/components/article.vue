@@ -1,6 +1,6 @@
 <template>
-    <div>
-    <div v-if="article" class="g-mn">
+    <div class="g-mn">
+    <template v-if="article">
         <div class="posts">
             <div class="m-post box article">
                 <a href="javascript:;" class="w-icon w-icon-1">&nbsp;</a>
@@ -27,7 +27,7 @@
             <span v-else class="next">下一篇</span>
         </div>
         <comment :id="article.id" :comments="comments" :loadcomment="loadcomment"></comment>
-    </div>
+    </template>
     </div>
 </template>
 

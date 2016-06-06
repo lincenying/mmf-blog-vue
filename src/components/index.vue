@@ -29,6 +29,7 @@
             actions: vuexAction
         },
         route: {
+            waitForData:true,
             data() {
                 this.page = 1
                 this.loadMore()
