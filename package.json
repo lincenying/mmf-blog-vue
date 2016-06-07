@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^2.4.0",
+    "highlight.js": "^9.4.0",
     "jquery": "^2.2.4",
     "js-cookie": "^2.1.2",
     "simditor": "^2.3.6",

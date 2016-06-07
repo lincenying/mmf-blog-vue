@@ -14,7 +14,7 @@
                         </select>
                     </section>
                     <section id="post-content">
-                        <textarea id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
+                        <textarea v-model="content"  id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
                     </section>
                     <section id="post-submit">
                         <input type="hidden" name="id" :value="id">
@@ -63,7 +63,7 @@
                     this.id = json.data.id
                     this.title = json.data.title
                     this.category = json.data.category
-                    window.editors.setValue(json.data.content)
+                    this.content = json.data.content
                     this.gLoadding(false)
                 });
             }
