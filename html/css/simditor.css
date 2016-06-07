@@ -304,8 +304,8 @@
 }
 .simditor .simditor-toolbar > ul > li > .toolbar-item.toolbar-item-image > input[type=file] {
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
     opacity: 0;
     font-size: 100px;
     cursor: pointer;
@@ -471,8 +471,8 @@
 }
 .simditor .simditor-toolbar .toolbar-menu.toolbar-menu-image .menu-item-upload-image input[type=file] {
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
     opacity: 0;
     font-size: 100px;
     cursor: pointer;
@@ -541,8 +541,8 @@
 }
 .simditor .simditor-popover.image-popover .btn-upload input[type=file] {
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
     opacity: 0;
     height: 100%;
     width: 28px;
@@ -682,7 +682,7 @@
 }
 .simditor .simditor-body hr, .editor-style hr {
     display: block;
-    height: 0px;
+    height: 0;
     border: 0;
     border-top: 1px solid #ccc;
     margin: 15px 0;
@@ -711,7 +711,9 @@
     background-color: #ffffee;
 }
 .simditor .simditor-body img, .editor-style img {
-    margin: 0 5px;
-    vertical-align: middle;
+    display: inline;
     max-width: 100%;
+    height: auto;
+    margin: 0;
+    vertical-align: middle;
 }
