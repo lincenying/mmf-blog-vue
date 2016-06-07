@@ -18,7 +18,7 @@
                     </section>
                     <section id="post-submit">
                         <input type="hidden" name="id" :value="id">
-                        <button class="btn btn-success">编辑</button>
+                        <button @click.prevent="checkSubmit" class="btn btn-success">编辑</button>
                     </section>
                 </ajax-form>
             </div>
@@ -38,6 +38,7 @@
         },
         data () {
             return {
+                editor: null,
                 id: '',
                 title: '',
                 category: '',
@@ -64,19 +65,31 @@
                     this.title = json.data.title
                     this.category = json.data.category
                     this.content = json.data.content
+                    if (this.editors) {
+                        this.editors.setValue(this.content)
+                    }
                     this.gLoadding(false)
                 });
             }
         },
         ready() {
             editor_config.textarea = $('#editor')
-            window.editors = new Simditor(editor_config)
-            editors.uploader.on("uploadsuccess", (e, file, result) => {
+            this.editors = new Simditor(editor_config)
+            this.editors.uploader.on("uploadsuccess", (e, file, result) => {
                 if (result.key)
                     file.img.attr("src", "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key);
                 else
                     file.img.remove();
             })
+        },
+        methods: {
+            checkSubmit() {
+                if (this.title == '' || this.category == '' || this.content == '') {
+                    this.showMsg('请将内容填写完整!', 'error')
+                    return false
+                }
+                $("#article-post").submit()
+            }
         },
         events: {
             beforeFormSubmit() {

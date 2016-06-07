@@ -17,7 +17,7 @@
                         <textarea v-model="content" id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
                     </section>
                     <section id="post-submit">
-                        <button class="btn btn-success">发布</button>
+                        <button @click.prevent="checkSubmit" class="btn btn-success">发布</button>
                     </section>
                 </ajax-form>
             </div>
@@ -62,6 +62,15 @@
                 else
                     file.img.remove();
             })
+        },
+        methods: {
+            checkSubmit() {
+                if (this.title == '' || this.category == '' || this.content == '') {
+                    this.showMsg('请将内容填写完整!', 'error')
+                    return false
+                }
+                $("#article-post").submit()
+            }
         },
         events: {
             beforeFormSubmit() {
