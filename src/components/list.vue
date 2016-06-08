@@ -47,7 +47,7 @@
                 if (!token) {
                     this.$route.router.go({ name: 'index'})
                 }
-                this.gLoadding(true)
+                this.gProgress(30)
                 return Promise.all([
                     this.getAdminArticle({
                         action: 'getAdminArticle',
@@ -55,7 +55,7 @@
                         page: page
                     })
                 ]).then(() => {
-                    this.gLoadding(false)
+                    this.gProgress(100)
                 })
             }
         },

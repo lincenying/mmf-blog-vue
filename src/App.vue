@@ -28,10 +28,7 @@
     <router-view class="router" transition="fade" transition-mode="out-in"></router-view>
     <div class="g-ft"><span title="Copyright">©</span> <a v-link="{ name: 'index', exact: true, activeClass: 'none'}">M·M·F 小屋</a> 2016.06.01</div>
     <Toaster></Toaster>
-    <div v-if="global.loading" class="spinner">
-        <div class="dot1"></div>
-        <div class="dot2"></div>
-    </div>
+    <loading-bar :progress="global.progress"></loading-bar>
 </div>
 </template>
 <script type="text/ecmascript-6">
@@ -42,6 +39,7 @@
     import store from './store'
     import Toaster from './components/app/toaster.vue'
     import About from './components/about.vue'
+    import loadingBar from './components/app/loading-bar.vue'
     export default {
         vuex: {
             getters: {
@@ -51,7 +49,8 @@
         store,
         components: {
             Toaster,
-            About
+            About,
+            loadingBar
         },
         computed: {
             visit() {
@@ -73,7 +72,7 @@
 <style>
     .router.app-transition,
     .fade-transition {
-        transition: opacity 0.3s ease;
+        transition: all 0.3s ease;
     }
     .router.app-enter,
     .router.app-leave {
@@ -81,10 +80,10 @@
     }
     .fade-enter {
         opacity: 1;
-        transform: translate3d(100%, 0, 0);
+        transform: translate3d(0, 100px, 0);
     }
     .fade-leave {
         opacity: 0;
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(100%, 0, 0);
     }
 </style>

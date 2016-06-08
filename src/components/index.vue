@@ -29,11 +29,13 @@
             actions: vuexAction
         },
         route: {
-            waitForData:true,
-            data() {
-                this.page = 1
-                this.loadMore()
+            canReuse() {
+                return false
             }
+        },
+        ready() {
+            this.page = 1
+            this.loadMore()
         },
         computed: {
             isPC() {
@@ -44,7 +46,7 @@
             loadMore(page = this.page) {
                 var id = this.$route.params.id || ""
                 var q = this.$route.params.q || ""
-                this.gLoadding(true)
+                this.gProgress(30)
                 return Promise.all([
                     this.getArticleList({
                         action: 'getArticleList',
@@ -54,10 +56,10 @@
                         page: page
                     })
                 ]).then(() => {
-                    this.gLoadding(false)
+                    this.gProgress(100)
                     this.page++
                     this.$nextTick(function () {
-                        $('pre code').each(function(i, block) {
+                        $('pre code:not(".hljs")').each(function(i, block) {
                             hljs.highlightBlock(block);
                         });
                     })

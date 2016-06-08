@@ -21,9 +21,9 @@
         <div class="box m-page box-do">
             <div class="w-icon w-icon-2"></div>
             <div class="w-icon w-icon-3"></div>
-            <a v-if="article.prev_id" v-link="{ name: 'article', params: { id: article.prev_id }}" id="__prev_permalink__" class="prev">上一篇</a>
+            <a v-if="article.prev_id" v-link="{ name: 'article', params: { id: article.prev_id }, force: true}" id="__prev_permalink__" class="prev">上一篇</a>
             <span v-else class="prev">上一篇</span>
-            <a v-if="article.next_id" v-link="{ name: 'article', params: { id: article.next_id }}" id="__next_permalink__" class="next">下一篇</a>
+            <a v-if="article.next_id" v-link="{ name: 'article', params: { id: article.next_id }, force: true}" id="__next_permalink__" class="next">下一篇</a>
             <span v-else class="next">下一篇</span>
         </div>
         <comment :id="article.id" :comments="comments" :loadcomment="loadcomment"></comment>
@@ -51,25 +51,29 @@
             }
         },
         route: {
-            data({to: {params: {id}}}) {
-                this.gLoadding(true)
-                this.comments.page = 1
-                var request = $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: "api.php?action=article&id=" + id
-                });
-                request.then((json) => {
-                    this.gLoadding(false)
-                    this.article = json.data
-                    this.loadcomment()
-                    this.$nextTick(function () {
-                        ua() === "PC" && $('pre code').each(function(i, block) {
-                            hljs.highlightBlock(block);
-                        });
-                    })
-                });
+            canReuse() {
+                return false
             }
+        },
+        ready() {
+            var id = this.$route.params.id
+            this.gProgress(30)
+            this.comments.page = 1
+            var request = $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "api.php?action=article&id=" + id
+            });
+            request.then((json) => {
+                this.gProgress(100)
+                this.article = json.data
+                this.$nextTick(() => {
+                    ua() === "PC" && $('pre code:not(".hljs")').each(function(i, block) {
+                        hljs.highlightBlock(block);
+                    });
+                })
+                this.loadcomment()
+            });
         },
         methods: {
             loadcomment() {

@@ -54,33 +54,34 @@
                 if (!token) {
                     this.$route.router.go({ name: 'index'})
                 }
-                this.gLoadding(true)
-                var request = $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: "api.php?action=getArticle&id=" + id
-                });
-                request.then((json) => {
-                    this.id = json.data.id
-                    this.title = json.data.title
-                    this.category = json.data.category
-                    this.content = json.data.content
-                    if (this.editors) {
-                        this.editors.setValue(this.content)
-                    }
-                    this.gLoadding(false)
-                });
             }
         },
         ready() {
-            editor_config.textarea = $('#editor')
-            this.editors = new Simditor(editor_config)
-            this.editors.uploader.on("uploadsuccess", (e, file, result) => {
-                if (result.key)
-                    file.img.attr("src", "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key);
-                else
-                    file.img.remove();
-            })
+            this.gProgress(30)
+            var id = this.$route.params.id
+            var request = $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "api.php?action=getArticle&id=" + id
+            });
+            request.then((json) => {
+                this.id = json.data.id
+                this.title = json.data.title
+                this.category = json.data.category
+                this.content = json.data.content
+
+                this.$nextTick(() => {
+                    editor_config.textarea = $('#editor')
+                    this.editors = new Simditor(editor_config)
+                    this.editors.uploader.on("uploadsuccess", (e, file, result) => {
+                        if (result.key)
+                            file.img.attr("src", "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key);
+                        else
+                            file.img.remove();
+                    })
+                })
+                this.gProgress(100)
+            });
         },
         methods: {
             checkSubmit() {
@@ -93,10 +94,10 @@
         },
         events: {
             beforeFormSubmit() {
-                this.gLoadding(true)
+                this.gProgress(30)
             },
             onFormComplete(el, res) {
-                this.gLoadding(false)
+                this.gProgress(100)
                 if (res.code == 200) {
                     this.showMsg(res.message, "success")
                     this.$route.router.go({ name: 'adminList', params: { page: this.$route.params.page }})

@@ -74,10 +74,10 @@
         },
         events: {
             beforeFormSubmit() {
-                this.gLoadding(true)
+                this.gProgress(30)
             },
             onFormComplete(el, res) {
-                this.gLoadding(false)
+                this.gProgress(100)
                 this.showMsg(res.message, res.code === 200 ? "success" : 'error')
                 $("#article-post").get(0).reset()
             }
