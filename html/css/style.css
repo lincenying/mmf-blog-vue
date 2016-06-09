@@ -84,6 +84,7 @@ hr {
 }
 /* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
 html {
+    overflow-x: hidden;
     overflow-y: scroll;
 }
 .clearfix:after {
@@ -116,7 +117,6 @@ html {
     box-shadow: none;
 }
 body {
-    overflow-x: hidden;
     word-wrap: break-word
 }
 a {

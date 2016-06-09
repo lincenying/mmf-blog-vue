@@ -35,6 +35,10 @@
             },
             actions: Action
         },
+        components: {
+            Toaster,
+            ajaxForm
+        },
         data() {
             return {
                 form: {
@@ -43,10 +47,6 @@
                     remember_me: ''
                 }
             }
-        },
-        components: {
-            Toaster,
-            ajaxForm
         },
         events: {
             beforeFormSubmit() {

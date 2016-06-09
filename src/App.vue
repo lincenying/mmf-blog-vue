@@ -41,12 +41,12 @@
     import About from './components/about.vue'
     import loadingBar from './components/app/loading-bar.vue'
     export default {
+        store,
         vuex: {
             getters: {
                 global: ({ global }) => global
             }
         },
-        store,
         components: {
             Toaster,
             About,

@@ -40,6 +40,9 @@
         vuex: {
             actions: vuexAction
         },
+        components: {
+            comment
+        },
         data () {
             return {
                 article: null,
@@ -50,9 +53,22 @@
                 }
             }
         },
-        route: {
-            canReuse() {
-                return false
+        methods: {
+            loadcomment() {
+                var id = this.$route.params.id
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: "api.php?action=comment&id=" + id + "&page=" + this.comments.page
+                }).then((json) => {
+                    if (this.comments.page == 1) {
+                        this.comments.list = [].concat(json.data.list)
+                    } else {
+                        this.comments.list = this.comments.list.concat(json.data.list)
+                    }
+                    this.comments.hasNext = json.data.hasNext
+                    this.comments.page++
+                });
             }
         },
         ready() {
@@ -75,26 +91,10 @@
                 this.loadcomment()
             });
         },
-        methods: {
-            loadcomment() {
-                var id = this.$route.params.id
-                $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: "api.php?action=comment&id=" + id + "&page=" + this.comments.page
-                }).then((json) => {
-                    if (this.comments.page == 1) {
-                        this.comments.list = [].concat(json.data.list)
-                    } else {
-                        this.comments.list = this.comments.list.concat(json.data.list)
-                    }
-                    this.comments.hasNext = json.data.hasNext
-                    this.comments.page++
-                });
+        route: {
+            canReuse() {
+                return false
             }
-        },
-        components: {
-            comment
         }
     }
 </script>

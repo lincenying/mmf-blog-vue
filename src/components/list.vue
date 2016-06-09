@@ -41,6 +41,20 @@
                 return parseInt(this.$route.params.page) + 1
             }
         },
+        methods: {
+            mdel(id) {
+                this.deleteArticle({
+                    id: id,
+                    action: 'delete'
+                })
+            },
+            recover(id) {
+                this.recoverArticle({
+                    id: id,
+                    action: 'recover'
+                })
+            }
+        },
         route: {
             data({to: {params: { page }}}) {
                 var token = store.get('token') && cookies.get('user')
@@ -56,20 +70,6 @@
                     })
                 ]).then(() => {
                     this.gProgress(100)
-                })
-            }
-        },
-        methods: {
-            mdel(id) {
-                this.deleteArticle({
-                    id: id,
-                    action: 'delete'
-                })
-            },
-            recover(id) {
-                this.recoverArticle({
-                    id: id,
-                    action: 'recover'
                 })
             }
         }

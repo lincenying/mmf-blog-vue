@@ -1,26 +1,28 @@
-<template>
+<template xmlns:v-validate="http://www.w3.org/1999/xhtml">
         <div class="g-mn">
             <div class="box">
-                <ajax-form id="article-post" action="/api.php?action=modify" method="post">
-                    <section id="post-title">
-                        <input v-model="title" type="text" name="title" class="form-control" placeholder="请输入标题">
-                    </section>
-                    <section id="post-category">
-                        <select v-model="category" id="category" name="category" class="form-control">
-                            <option value="">请选择分类</option>
-                            <option value="1">生活</option>
-                            <option value="2">工作</option>
-                            <option value="3">其他</option>
-                        </select>
-                    </section>
-                    <section id="post-content">
-                        <textarea v-model="content"  id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
-                    </section>
-                    <section id="post-submit">
-                        <input type="hidden" name="id" :value="id">
-                        <button @click.prevent="checkSubmit" class="btn btn-success">编辑</button>
-                    </section>
-                </ajax-form>
+                <validator name="edit">
+                    <ajax-form id="article-post" action="/api.php?action=modify" method="post">
+                        <section id="post-title">
+                            <input v-model="title" v-validate:title="{ required: true }" type="text" name="title" class="form-control" placeholder="请输入标题">
+                        </section>
+                        <section id="post-category">
+                            <select v-model="category" v-validate:category="{ required: true }" id="category" name="category" class="form-control">
+                                <option value="">请选择分类</option>
+                                <option value="1">生活</option>
+                                <option value="2">工作</option>
+                                <option value="3">其他</option>
+                            </select>
+                        </section>
+                        <section id="post-content">
+                            <textarea v-model="content" v-validate:content="['editor']" id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
+                        </section>
+                        <section id="post-submit">
+                            <input type="hidden" name="id" :value="id">
+                            <button @click="onSubmit" class="btn btn-success">编辑</button>
+                        </section>
+                    </ajax-form>
+                </validator>
             </div>
         </div>
 </template>
@@ -31,10 +33,13 @@
     import Simditor from 'simditor'
     import store from 'store2'
     import cookies from 'js-cookie'
-    import editor_config from '../tools/editor_config'
+    import editorConfig from '../tools/editor_config'
     export default {
         vuex: {
             actions: vuexAction
+        },
+        components: {
+            ajaxForm
         },
         data () {
             return {
@@ -45,14 +50,30 @@
                 content: ''
             }
         },
-        components: {
-            ajaxForm
+        events: {
+            beforeFormSubmit() {
+                this.gProgress(30)
+            },
+            onFormComplete(el, res) {
+                this.gProgress(100)
+                if (res.code == 200) {
+                    this.showMsg(res.message, "success")
+                    this.$route.router.go({ name: 'adminList', params: { page: this.$route.params.page }})
+                } else {
+                    this.showMsg(res.message, 'error')
+                }
+            }
         },
-        route: {
-            data({to: {params: {id}}}) {
-                var token = store.get('token') && cookies.get('user')
-                if (!token) {
-                    this.$route.router.go({ name: 'index'})
+        methods: {
+            onSubmit(e) {
+                this.$validate(true)
+                if (this.$post.invalid) {
+                    var msg = '';
+                    this.$post.errors.map(i => {
+                        msg += i.message + "<br>";
+                    })
+                    this.showMsg(msg, 'error')
+                    e.preventDefault()
                 }
             }
         },
@@ -71,8 +92,8 @@
                 this.content = json.data.content
 
                 this.$nextTick(() => {
-                    editor_config.textarea = $('#editor')
-                    this.editors = new Simditor(editor_config)
+                    editorConfig.textarea = $('#editor')
+                    this.editors = new Simditor(editorConfig)
                     this.editors.uploader.on("uploadsuccess", (e, file, result) => {
                         if (result.key)
                             file.img.attr("src", "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key);
@@ -83,27 +104,17 @@
                 this.gProgress(100)
             });
         },
-        methods: {
-            checkSubmit() {
-                if (this.title == '' || this.category == '' || this.content == '') {
-                    this.showMsg('请将内容填写完整!', 'error')
-                    return false
+        route: {
+            data() {
+                var token = store.get('token') && cookies.get('user')
+                if (!token) {
+                    this.$route.router.go({ name: 'index'})
                 }
-                $("#article-post").submit()
             }
         },
-        events: {
-            beforeFormSubmit() {
-                this.gProgress(30)
-            },
-            onFormComplete(el, res) {
-                this.gProgress(100)
-                if (res.code == 200) {
-                    this.showMsg(res.message, "success")
-                    this.$route.router.go({ name: 'adminList', params: { page: this.$route.params.page }})
-                } else {
-                    this.showMsg(res.message, 'error')
-                }
+        validators: {
+            editor() {
+                return $(this.el).val() != ''
             }
         }
     }

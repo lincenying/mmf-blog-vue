@@ -73,6 +73,15 @@
                 wait: false
             }
         },
+        methods: {
+            styling() {
+                if (!this.wait) {
+                    return {width: `${this.width}%`}
+                } else {
+                    return {width: `100%`}
+                }
+            }
+        },
         watch: {
             progress(val, old){
                 if (old == 0 && val > 0) {
@@ -106,15 +115,6 @@
             error(val, old){
                 this.progress = 100
                 this.$dispatch('loading-bar:error')
-            }
-        },
-        methods: {
-            styling() {
-                if (!this.wait) {
-                    return {width: `${this.width}%`}
-                } else {
-                    return {width: `100%`}
-                }
             }
         }
     }

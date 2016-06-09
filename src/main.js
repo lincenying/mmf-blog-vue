@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
-
+import vueValidator from 'vue-validator'
 import store from './store'
 
 import App from './App.vue'
@@ -13,6 +13,7 @@ import adminPost from './components/post.vue'
 import adminEdit from './components/edit.vue'
 
 Vue.use(VueRouter)
+Vue.use(vueValidator)
 
 var router = new VueRouter({
     hashbang: true,

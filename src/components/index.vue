@@ -17,29 +17,23 @@
     import hljs from 'highlight.js'
     import { ua } from '../tools/ua'
     export default {
-        data () {
-            return {
-                page: 1
-            }
-        },
         vuex: {
             getters: {
                 article: ({article}) => article
             },
             actions: vuexAction
         },
-        route: {
-            canReuse() {
-                return false
-            }
-        },
-        ready() {
-            this.page = 1
-            this.loadMore()
+        components: {
+            indexPost
         },
         computed: {
             isPC() {
                 return ua() == "PC"
+            }
+        },
+        data () {
+            return {
+                page: 1
             }
         },
         methods: {
@@ -66,8 +60,14 @@
                 })
             }
         },
-        components: {
-            indexPost
+        ready() {
+            this.page = 1
+            this.loadMore()
+        },
+        route: {
+            canReuse() {
+                return false
+            }
         }
     }
 </script>

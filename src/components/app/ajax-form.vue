@@ -51,7 +51,7 @@
                     this.method = 'post'
                 }
                 var xhr = new XMLHttpRequest()
-                var handleFinish = (function (data) {
+                var handleFinish = (function() {
                     if (xhr.readyState === 4) {
                         if (xhr.status < 400) {
                             this.$dispatch('onFormComplete', this, xhr.response)
