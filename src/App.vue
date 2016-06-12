@@ -26,7 +26,10 @@
         </div>
     </div>
     <router-view class="router" transition="fade" transition-mode="out-in"></router-view>
-    <div class="g-ft"><span title="Copyright">©</span> <a v-link="{ name: 'index', exact: true, activeClass: 'none'}">M·M·F 小屋</a> 2016.06.01</div>
+    <div class="g-ft">
+        <span class="copy"><span title="Copyright">©</span> <a v-link="{ name: 'index', exact: true, activeClass: 'none'}">M·M·F 小屋</a> 2016.06</span>
+        <span class="beian"><i></i> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602003638">浙公网安备 33010602003638号</a></span>
+    </div>
     <Toaster></Toaster>
     <loading-bar :progress="global.progress"></loading-bar>
 </div>
@@ -85,5 +88,16 @@
     .fade-leave {
         opacity: 0;
         transform: translate3d(100px, 0, 0);
+    }
+    .beian {
+        float: right;
+    }
+    .beian i {
+        width: 14px;
+        height: 14px;
+        background: url(http://beian.gov.cn/img/ghs.png);
+        background-size: cover;
+        display: inline-block;
+        vertical-align: top;
     }
 </style>

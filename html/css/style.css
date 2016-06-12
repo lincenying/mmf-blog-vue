@@ -791,7 +791,7 @@ textarea.form-control {
     transition: all .25s ease-in-out;
 }
 .index.m-post .editor-style.showless {
-    height: 200px;
+    max-height: 200px;
     overflow: hidden;
 }
 .index.m-post .editor-style img {

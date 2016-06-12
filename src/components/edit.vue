@@ -93,8 +93,11 @@
 
                 this.$nextTick(() => {
                     editorConfig.textarea = $('#editor')
-                    this.editors = new Simditor(editorConfig)
-                    this.editors.uploader.on("uploadsuccess", (e, file, result) => {
+                    window.editors = new Simditor(editorConfig)
+                    editors.uploader.on("beforeupload", () => {
+                        editors.uploader.opts.params.key = new Date().getTime() + ".jpg"
+                    })
+                    editors.uploader.on("uploadsuccess", (e, file, result) => {
                         if (result.key)
                             file.img.attr("src", "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key);
                         else
