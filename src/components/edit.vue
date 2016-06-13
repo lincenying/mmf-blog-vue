@@ -30,10 +30,8 @@
 <script type="text/ecmascript-6">
     import * as vuexAction from "../store/actions"
     import ajaxForm from './app/ajax-form.vue'
-    import Simditor from 'simditor'
     import store from 'store2'
     import cookies from 'js-cookie'
-    import editorConfig from '../tools/editor_config'
     export default {
         vuex: {
             actions: vuexAction
@@ -67,7 +65,7 @@
         methods: {
             onSubmit(e) {
                 this.$validate(true)
-                if (this.$post.invalid) {
+                if (this.$edit.invalid) {
                     var msg = '';
                     this.$post.errors.map(i => {
                         msg += i.message + "<br>";
@@ -92,17 +90,26 @@
                 this.content = json.data.content
 
                 this.$nextTick(() => {
-                    editorConfig.textarea = $('#editor')
-                    window.editors = new Simditor(editorConfig)
-                    editors.uploader.on("beforeupload", () => {
-                        editors.uploader.opts.params.key = new Date().getTime() + ".jpg"
-                    })
-                    editors.uploader.on("uploadsuccess", (e, file, result) => {
-                        if (result.key)
-                            file.img.attr("src", "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key);
-                        else
-                            file.img.remove();
-                    })
+                    var testEditor = editormd("post-content", {
+                        width: "100%",
+                        height: 500,
+                        markdown: "",
+                        placeholder: '请输入内容...',
+                        path: './static/editor.md/lib/',
+                        toolbarIcons() {
+                            return [
+                                "bold", "italic", "quote", "|",
+                                "list-ul", "list-ol", "hr", "|",
+                                "link", "reference-link", "image", "code", "code-block", "table", "|",
+                                "watch", "preview", "fullscreen", "|",
+                                "help"
+                            ]
+                        },
+                        saveHTMLToTextarea : true,
+                        imageUpload : true,
+                        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                        imageUploadURL : "./api.php?action=upload"
+                    });
                 })
                 this.gProgress(100)
             });

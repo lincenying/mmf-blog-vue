@@ -12,7 +12,7 @@
                 <div class="cont cont-1">
                     <div class="text">
                         <h2><a v-link="{ name: 'article', params: { id: article.id }}" v-text="article.title"></a></h2>
-                        <div class="editor-style" v-html="article.content"></div>
+                        <div class="markdown-body" v-html="article.content | marked"></div>
                     </div>
                 </div>
                 <div class="info info-1"></div>
@@ -33,9 +33,15 @@
 
 <script type="text/ecmascript-6">
     import * as vuexAction from "../store/actions"
+    import marked from 'marked'
     import comment from './comment.vue'
     import hljs from 'highlight.js'
     import { ua } from '../tools/ua'
+    marked.setOptions({
+        highlight(code) {
+            return hljs.highlightAuto(code).value
+        }
+    })
     export default {
         vuex: {
             actions: vuexAction
@@ -52,6 +58,9 @@
                     page: 1
                 }
             }
+        },
+        filters: {
+            marked: marked
         },
         methods: {
             loadcomment() {
@@ -83,11 +92,6 @@
             request.then((json) => {
                 this.gProgress(100)
                 this.article = json.data
-                this.$nextTick(() => {
-                    ua() === "PC" && $('pre code:not(".hljs")').each(function(i, block) {
-                        hljs.highlightBlock(block);
-                    });
-                })
                 this.loadcomment()
             });
         },

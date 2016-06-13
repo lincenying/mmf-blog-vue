@@ -30,10 +30,6 @@ h4, h5, h6 {
 address, cite, dfn, em, var {
     font-style: normal;
 }
-/* 将斜体扶正 */
-code, kbd, pre, samp, tt {
-    font-family: "Courier New", Courier, monospace;
-}
 /* 统一等宽字体 */
 small {
     font-size: 12px;
@@ -610,9 +606,9 @@ h1 a {
     background-image: none;
     border: 1px solid #d6d6d6;
     border-radius: 2px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     border-top-color: #c2c2c2;
     box-sizing: border-box;
 }
@@ -623,9 +619,10 @@ textarea.form-control {
     height: 100px;
 }
 .ztag_tips {
-    color:red;display:none;margin-right:10px;
+    color: red;
+    display: none;
+    margin-right: 10px;
 }
-
 .list-group-item {
     position: relative;
     display: block;
@@ -647,9 +644,9 @@ textarea.form-control {
     text-align: center;
     background-color: #999;
     border-radius: 5px;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
 }
-.list-group-item>.badge {
+.list-group-item > .badge {
     float: right;
 }
 .badge.badge-success {
@@ -664,13 +661,12 @@ textarea.form-control {
     background: #5bc0de;
     border: 1px solid #5bc0de;
 }
-.list-group-item>.badge {
+.list-group-item > .badge {
     line-height: 16px;
 }
 .badge + .badge {
     margin-right: 5px;
 }
-
 .btn {
     display: inline-block;
     margin-bottom: 0;
@@ -695,7 +691,7 @@ textarea.form-control {
     line-height: 15px;
     font-weight: 400;
     padding: 7px 12px;
-    outline: 0!important;
+    outline: 0 !important;
 }
 .btn-success {
     color: #fff;
@@ -710,20 +706,18 @@ textarea.form-control {
     border-color: #ddd;
     border-bottom-color: #cecece;
     background: #f4f4f4;
-    background-image: -webkit-linear-gradient(top,#f4f4f4 0,#eaeaea 100%);
-    background-image: linear-gradient(to bottom,#f4f4f4 0,#eaeaea 100%);
+    background-image: -webkit-linear-gradient(top, #f4f4f4 0, #eaeaea 100%);
+    background-image: linear-gradient(to bottom, #f4f4f4 0, #eaeaea 100%);
     background-repeat: repeat-x;
 }
 .btn-success, .btn-success:focus {
     border-color: #4cb64c;
     border-bottom-color: #42a142;
     background: #5ebd5e;
-    background-image: -webkit-linear-gradient(top,#62be62 0,#4cb64c 100%);
-    background-image: linear-gradient(to bottom,#62be62 0,#4cb64c 100%);
+    background-image: -webkit-linear-gradient(top, #62be62 0, #4cb64c 100%);
+    background-image: linear-gradient(to bottom, #62be62 0, #4cb64c 100%);
     background-repeat: repeat-x;
 }
-
-
 .m-nav ul {
     display: table;
     margin-left: -15px;
@@ -764,7 +758,6 @@ textarea.form-control {
 .m-nav ul .tag-other a {
     color: #eb9e79;
 }
-
 .m-nav ul .tag-life i {
     background: #eb6f70;
 }
@@ -774,31 +767,29 @@ textarea.form-control {
 .m-nav ul .tag-other i {
     background: #eb9e79;
 }
-
 .m-nav ul li:hover i,
-.m-nav ul li a.v-link-active i{
+.m-nav ul li a.v-link-active i {
     width: 18px;
     height: 18px;
     margin-top: -6px;
     margin-bottom: 8px;
 }
-
 .info-1 {
     display: none;
 }
-
-.index.m-post .editor-style {
+.index.m-post .markdown-body {
     transition: all .25s ease-in-out;
 }
-.index.m-post .editor-style.showless {
+.index.m-post .markdown-body.showless {
     max-height: 200px;
     overflow: hidden;
 }
-.index.m-post .editor-style img {
+.index.m-post .markdown-body img {
     max-width: 200px;
     max-height: 200px;
     width: auto;
     height: auto;
+    margin: 10px 0;
 }
 .text .more-less {
     text-align: right;
@@ -809,7 +800,31 @@ textarea.form-control {
 .text .more {
     padding-top: 15px;
 }
-
+.markdown-body {
+    color: #666;
+}
+.m-post .markdown-body pre code {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #eee;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.m-post .markdown-body pre {
+    padding: 0;
+    margin-bottom: 15px;
+}
+.markdown-body h3 {
+    margin-bottom: 10px;
+}
+.markdown-body h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
 @media screen and (max-width: 860px) {
     .g-doc {
         width: 100%;

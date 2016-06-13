@@ -8,7 +8,7 @@
         <div class="cont cont-1">
             <div class="text">
                 <h2><a v-link="{ name: 'article', params: { id: item.id }}" v-text="item.title"></a></h2>
-                <div v-if="ispc" class="editor-style" :class="!showMore ? 'showless' : ''" v-html="item.content"></div>
+                <div v-if="ispc" class="markdown-body" :class="!showMore ? 'showless' : ''" v-html="item.content | marked"></div>
                 <div v-if="ispc" class="more-less">
                     <a v-if="!showMore" @click="open($event)" class="more" href="javascript:;">展开 ↓</a>
                     <a v-else @click="open($event)" class="less" href="javascript:;">收起 ↑</a>
@@ -19,12 +19,21 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
+    import marked from 'marked'
+    marked.setOptions({
+        highlight(code) {
+            return hljs.highlightAuto(code).value
+        }
+    })
     export default {
         props: ['item', 'ispc'],
         data () {
             return {
                 showMore: false
             }
+        },
+        filters: {
+            marked: marked
         },
         methods: {
             open(e) {

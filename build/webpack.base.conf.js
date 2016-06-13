@@ -12,13 +12,16 @@ module.exports = {
         app: './src/main.js',
         login: './src/login.js',
         vendor: [
-            'vue', 'vue-router', 'vuex', 'vuex-router-sync', 'jquery'
+            'vue', 'vue-router', 'vuex', 'vuex-router-sync'
         ]
     },
     output: {
         path: config.build.assetsRoot,
         publicPath: config.build.assetsPublicPath,
         filename: '[name].js'
+    },
+    externals: {
+        'jquery': 'jQuery'
     },
     resolve: {
         extensions: ['', '.js', '.vue'],

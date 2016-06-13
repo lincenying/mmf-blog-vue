@@ -35,9 +35,9 @@
 </div>
 </template>
 <script type="text/ecmascript-6">
-    import '../html/css/style.css'
-    import '../html/css/simditor.css'
+    import '../static/editor.md/css/editormd.css'
     import '../html/css/hljs/googlecode.css'
+    import '../html/css/style.css'
     import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
     import store from './store'
     import Toaster from './components/app/toaster.vue'

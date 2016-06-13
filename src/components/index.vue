@@ -52,11 +52,6 @@
                 ]).then(() => {
                     this.gProgress(100)
                     this.page++
-                    this.$nextTick(function () {
-                        $('pre code:not(".hljs")').each(function(i, block) {
-                            hljs.highlightBlock(block);
-                        });
-                    })
                 })
             }
         },
