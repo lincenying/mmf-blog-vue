@@ -14,7 +14,6 @@
 <script type="text/ecmascript-6">
     import * as vuexAction from "../store/actions"
     import indexPost from './index-post.vue'
-    import hljs from 'highlight.js'
     import { ua } from '../tools/ua'
     export default {
         vuex: {

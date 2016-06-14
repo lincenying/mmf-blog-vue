@@ -20,6 +20,7 @@
 </template>
 <script type="text/ecmascript-6">
     import marked from 'marked'
+    import hljs from 'highlight.js'
     marked.setOptions({
         highlight(code) {
             return hljs.highlightAuto(code).value
