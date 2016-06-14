@@ -31,15 +31,16 @@
         <span class="beian"><i></i> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602003638">浙公网安备 33010602003638号</a></span>
     </div>
     <Toaster></Toaster>
-    <loading-bar :progress="global.progress"></loading-bar>
 </div>
 </template>
 <script type="text/ecmascript-6">
     import '../static/editor.md/css/editormd.css'
     import '../html/css/hljs/googlecode.css'
     import '../html/css/style.css'
-    import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
+    import '../node_modules/vue-toastr/dist/vue-toastr.min.css'
+    import '../node_modules/nprogress/nprogress.css'
     import store from './store'
+    import NProgress from 'nprogress'
     import Toaster from './components/app/toaster.vue'
     import About from './components/about.vue'
     import loadingBar from './components/app/loading-bar.vue'
@@ -67,6 +68,15 @@
                     return false
                 } else {
                     this.$route.router.go({ name: 'search', params: { q: q }})
+                }
+            }
+        },
+        watch: {
+            'global.progress'(val) {
+                if (val != 100) {
+                    NProgress.start()
+                } else {
+                    NProgress.done()
                 }
             }
         }
