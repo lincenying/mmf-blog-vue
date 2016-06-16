@@ -813,11 +813,15 @@ textarea.form-control {
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-    background: #eee;
     color: black;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
+    background: linear-gradient(#f7f7f7 50%, #eee 50%);
+    background-size: 100% 44px;
+    background-origin: content-box;
+    line-height: 22px;
+    font-family: "Microsoft YaHei","微软雅黑","Hiragino Sans GB",STXihei,"华文细黑",STHeiti,RobotoDraft,Roboto,"Helvetica Neue",Helvetica,Tahoma,"Droid Sans","wenquanyi micro hei",FreeSans,Arimo,Arial,SimSun,"宋体",Heiti,"黑体",sans-serif;
 }
 .m-post .markdown-body pre {
     padding: 0;
