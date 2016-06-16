@@ -54,6 +54,7 @@
                 this.gProgress(100)
                 this.showMsg(res.message, res.code === 200 ? "success" : 'error')
                 $("#article-post").get(0).reset()
+                testEditor.clear()
             }
         },
         methods: {
@@ -70,7 +71,7 @@
             }
         },
         ready() {
-            var testEditor = editormd("post-content", {
+            window.testEditor = editormd("post-content", {
                 width: "100%",
                 height: 500,
                 markdown: "",

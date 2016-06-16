@@ -279,32 +279,32 @@ a {
     display: block;
     max-width: 100%;
 }
-.text h2 a {
+.markdown-body h2 a {
     color: #333;
     font-size: 18px;
     text-decoration: none
 }
-.text h2, .text ul, .text ol, .text p, .text blockquote {
+.markdown-body h2, .markdown-body ul, .markdown-body ol, .markdown-body p, .markdown-body blockquote {
     margin: 0 0 15px
 }
-.text ul, .text ol {
+.markdown-body ul, .markdown-body ol {
     padding: 0 0 0 2.5em
 }
-.text ul li {
+.markdown-body ul li {
     list-style: outside disc
 }
-.text ol li {
+.markdown-body ol li {
     list-style: outside decimal
 }
-.text blockquote {
+.markdown-body blockquote {
     zoom: 1;
     padding: 0 0 0 15px;
     border-left: 1px solid #ccc
 }
-.text img {
+.markdown-body img {
     margin: 0 auto 10px
 }
-.text a {
+.markdown-body a {
     text-decoration: underline
 }
 .info {
@@ -802,6 +802,12 @@ textarea.form-control {
 }
 .markdown-body {
     color: #666;
+    line-height: 1.7;
+    padding-top: 15px;
+}
+.markdown-body code {
+    color: #c7254e;
+    background-color: #f9f2f4;
 }
 .m-post .markdown-body pre code {
     display: block;
@@ -825,6 +831,7 @@ textarea.form-control {
     border-bottom: 1px solid #eee;
     margin-bottom: 10px;
 }
+
 @media screen and (max-width: 860px) {
     .g-doc {
         width: 100%;
@@ -849,7 +856,7 @@ textarea.form-control {
     .m-tit {
         padding: 5px 20px 0;
     }
-    .text h2 {
+    .markdown-body h2 {
         height: 27px;
         overflow: hidden;
         white-space: nowrap;

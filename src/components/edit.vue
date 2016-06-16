@@ -15,7 +15,7 @@
                             </select>
                         </section>
                         <section id="post-content">
-                            <textarea v-model="content" v-validate:content="['editor']" id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
+                            <textarea v-validate:content="['editor']" id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
                         </section>
                         <section id="post-submit">
                             <input type="hidden" name="id" :value="id">
@@ -93,7 +93,6 @@
                     var testEditor = editormd("post-content", {
                         width: "100%",
                         height: 500,
-                        markdown: "",
                         placeholder: '请输入内容...',
                         path: './static/editor.md/lib/',
                         toolbarIcons() {
@@ -105,6 +104,8 @@
                                 "help"
                             ]
                         },
+                        watch : false,
+                        markdown: json.data.content,
                         saveHTMLToTextarea : true,
                         imageUpload : true,
                         imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
