@@ -86,6 +86,7 @@
                         "help"
                     ]
                 },
+                watch : false,
                 saveHTMLToTextarea : true,
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
