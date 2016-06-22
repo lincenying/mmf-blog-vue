@@ -24,7 +24,8 @@
     marked.setOptions({
         highlight(code) {
             return hljs.highlightAuto(code).value
-        }
+        },
+        breaks: true
     })
     export default {
         props: ['item', 'ispc'],
