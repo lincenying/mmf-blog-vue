@@ -1,30 +1,30 @@
 <template xmlns:v-validate="http://www.w3.org/1999/xhtml">
-        <div class="g-mn">
-            <div class="box">
-                <validator name="edit">
-                    <ajax-form id="article-post" action="/api.php?action=modify" method="post">
-                        <section id="post-title">
-                            <input v-model="title" v-validate:title="{ required: true }" type="text" name="title" class="form-control" placeholder="请输入标题">
-                        </section>
-                        <section id="post-category">
-                            <select v-model="category" v-validate:category="{ required: true }" id="category" name="category" class="form-control">
-                                <option value="">请选择分类</option>
-                                <option value="1">生活</option>
-                                <option value="2">工作</option>
-                                <option value="3">其他</option>
-                            </select>
-                        </section>
-                        <section id="post-content">
-                            <textarea v-validate:content="['editor']" id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
-                        </section>
-                        <section id="post-submit">
-                            <input type="hidden" name="id" :value="id">
-                            <button @click="onSubmit" class="btn btn-success">编辑</button>
-                        </section>
-                    </ajax-form>
-                </validator>
-            </div>
+    <div class="g-mn">
+        <div class="box">
+            <validator name="edit">
+                <ajax-form id="article-post" action="/api.php?action=modify" method="post">
+                    <section id="post-title">
+                        <input v-model="title" v-validate:title="{ required: true }" type="text" name="title" class="form-control" placeholder="请输入标题">
+                    </section>
+                    <section id="post-category">
+                        <select v-validate:category="{ required: true }" id="category" name="category" class="form-control">
+                            <option value="">请选择分类</option>
+                            <option value="1">生活</option>
+                            <option value="2">工作</option>
+                            <option value="3">其他</option>
+                        </select>
+                    </section>
+                    <section id="post-content">
+                        <textarea v-validate:content="['editor']" id="editor" name="content" class="form-control" data-autosave="editor-content"></textarea>
+                    </section>
+                    <section id="post-submit">
+                        <input type="hidden" name="id" :value="id">
+                        <button @click="onSubmit" class="btn btn-success">编辑</button>
+                    </section>
+                </ajax-form>
+            </validator>
         </div>
+    </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -41,7 +41,6 @@
         },
         data () {
             return {
-                editor: null,
                 id: '',
                 title: '',
                 category: '',

@@ -1,3 +1,4 @@
+import store from 'store2'
 import api from '../api'
 import * as types from './mutation-types'
 
@@ -18,9 +19,24 @@ export const hideMsg = ({dispatch}) => {
 }
 
 export const getArticleList = ({dispatch}, config) => {
-    return api.getFromConfig(config).then(({data}) => {
-        dispatch(types.RECEIVE_ARTICLE, data, config.page)
-    })
+    var id = (config.id ? config.id : '0') + '_' + (config.page ? config.page : '1'),
+        key = 'getArticleList_' + id,
+        keyTime = 'getArticleList_Time_' + id,
+        list = store(key),
+        listTime = store(keyTime),
+        nowTime = new Date().getTime()
+    if (config.q || !list || !listTime || nowTime > listTime + 600000) {
+        return api.getFromConfig(config).then(({data}) => {
+            store(key, data)
+            store(keyTime, nowTime)
+            dispatch(types.RECEIVE_ARTICLE, data, config.page)
+        })
+    } else {
+        return new Promise((resolve) => {
+            dispatch(types.RECEIVE_ARTICLE, list, config.page)
+            resolve('')
+        })
+    }
 }
 export const getAdminArticle = ({dispatch}, config) => {
     return api.getFromConfig(config).then(({data}) => {

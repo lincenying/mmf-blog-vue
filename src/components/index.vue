@@ -15,7 +15,6 @@
     import * as vuexAction from "../store/actions"
     import indexPost from './index-post.vue'
     import { ua } from '../tools/ua'
-    import scrollReveal from 'scrollreveal'
     export default {
         vuex: {
             getters: {
@@ -41,7 +40,7 @@
                 var id = this.$route.params.id || ""
                 var q = this.$route.params.q || ""
                 this.gProgress(30)
-                return Promise.all([
+                Promise.all([
                     this.getArticleList({
                         action: 'getArticleList',
                         limit: 10,
@@ -52,20 +51,10 @@
                 ]).then(() => {
                     this.gProgress(100)
                     this.page++
-                    this.$nextTick(function () {
-                        sr.reveal('.article', {
-                            reset: true,
-                            origin   : "right",
-                            distance : "30px",
-                            duration : 900,
-                            scale    : 1
-                        });
-                    })
                 })
             }
         },
         ready() {
-            window.sr = scrollReveal()
             this.page = 1
             this.loadMore()
         },
