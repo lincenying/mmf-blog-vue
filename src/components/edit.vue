@@ -7,7 +7,7 @@
                         <input v-model="title" v-validate:title="{ required: true }" type="text" name="title" class="form-control" placeholder="请输入标题">
                     </section>
                     <section id="post-category">
-                        <select :value="category" v-validate:category="{ required: true }" id="category" name="category" class="form-control">
+                        <select v-model="category" v-validate:category="{ required: true }" id="category" name="category" class="form-control">
                             <option value="">请选择分类</option>
                             <option value="1">生活</option>
                             <option value="2">工作</option>
