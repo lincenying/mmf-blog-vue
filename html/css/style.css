@@ -866,4 +866,7 @@ textarea.form-control {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+    .index .text {
+        margin-bottom: 10px;
+    }
 }
