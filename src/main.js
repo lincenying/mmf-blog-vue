@@ -58,6 +58,9 @@ router.map({
 
 sync(store, router)
 
+router.beforeEach(() => {
+    store.dispatch('GLOBAL_PROGRESS', 30)
+})
 router.afterEach(() => {
     window.scrollTo(0, 0)
 })

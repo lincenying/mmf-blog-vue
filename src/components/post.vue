@@ -92,6 +92,7 @@
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "./api.php?action=upload"
             });
+            this.gProgress(100)
         },
         route: {
             data() {

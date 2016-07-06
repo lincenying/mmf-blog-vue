@@ -61,7 +61,6 @@
                 if (!token) {
                     this.$route.router.go({ name: 'index'})
                 }
-                this.gProgress(30)
                 return Promise.all([
                     this.getAdminArticle({
                         action: 'getAdminArticle',

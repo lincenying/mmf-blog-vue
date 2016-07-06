@@ -83,7 +83,6 @@
         },
         ready() {
             var id = this.$route.params.id
-            this.gProgress(30)
             this.comments.page = 1
             var request = $.ajax({
                 type: "POST",

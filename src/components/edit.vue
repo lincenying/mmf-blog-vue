@@ -75,7 +75,6 @@
             }
         },
         ready() {
-            this.gProgress(30)
             var id = this.$route.params.id
             var request = $.ajax({
                 type: "POST",

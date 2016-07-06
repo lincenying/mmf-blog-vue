@@ -39,7 +39,6 @@
             loadMore(page = this.page) {
                 var id = this.$route.params.id || ""
                 var q = this.$route.params.q || ""
-                this.gProgress(30)
                 Promise.all([
                     this.getArticleList({
                         action: 'getArticleList',
