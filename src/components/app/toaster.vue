@@ -2,7 +2,7 @@
     <vue-toastr v-ref:toastr></vue-toastr>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="babel">
     import vueToastr from 'vue-toastr'
     import { showMsg, hideMsg } from '../../store/actions'
     export default {

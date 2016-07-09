@@ -19,7 +19,7 @@
     </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="babel">
     import * as vuexAction from "../store/actions"
     import store from 'store2'
     import cookies from 'js-cookie'

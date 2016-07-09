@@ -55,7 +55,7 @@
     </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="babel">
     export default {
         props: {
             progress: Number,

@@ -33,7 +33,7 @@
     <Toaster></Toaster>
 </div>
 </template>
-<script type="text/ecmascript-6">
+<script lang="babel">
     import '../static/editor.md/css/editormd.css'
     import '../html/css/hljs/googlecode.css'
     import '../html/css/style.css'

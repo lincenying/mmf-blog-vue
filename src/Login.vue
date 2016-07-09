@@ -21,7 +21,7 @@
         <div class="dot2"></div>
     </div>
 </template>
-<script type="text/ecmascript-6">
+<script lang="babel">
     import '../html/css/login.css'
     import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
     import * as Action from "./store/actions"

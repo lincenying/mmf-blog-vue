@@ -18,7 +18,7 @@
         <div class="info info-1"></div>
     </div>
 </template>
-<script type="text/ecmascript-6">
+<script lang="babel">
     import marked from 'marked'
     import hljs from 'highlight.js'
     marked.setOptions({

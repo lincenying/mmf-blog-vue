@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="babel">
     import * as vuexAction from "../store/actions"
     import ajaxForm from './app/ajax-form.vue'
     import store from 'store2'

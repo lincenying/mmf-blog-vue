@@ -3,17 +3,17 @@
         <slot></slot>
     </form>
 </template>
-<script type="text/ecmascript-6">
+<script lang="babel">
     export default {
-        props: {
-            'class': String,
-            'action': {
-                type: String,
+        props  : {
+            'class'  : String,
+            'action' : {
+                type    : String,
                 required: true
             },
-            'method': {
-                type: String,
-                required: true,
+            'method' : {
+                type     : String,
+                required : true,
                 validator: function (value) {
                     switch (value.toUpperCase()) {
                         case 'CONNECT':
@@ -51,7 +51,7 @@
                     this.method = 'post'
                 }
                 var xhr = new XMLHttpRequest()
-                var handleFinish = (function() {
+                var handleFinish = (function () {
                     if (xhr.readyState === 4) {
                         if (xhr.status < 400) {
                             this.$dispatch('onFormComplete', this, xhr.response)
@@ -67,15 +67,14 @@
                     }
                 }).bind(this)
                 xhr.open(this.method, this.action, true)
-
-                xhr.setRequestHeader("X-Requested-With","XMLHttpRequest");
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
                 xhr.setRequestHeader('Authorization', 'Basic dGVzdDpwYXNzd2Q=');
                 if (this.vResponseType) {
                     xhr.responseType = this.vResponseType
                 } else {
                     xhr.responseType = 'json'
                 }
-                xhr.upload.addEventListener('progress', handleProgress)
+                xhr.upload && xhr.upload.addEventListener('progress', handleProgress)
                 xhr.addEventListener('readystatechange', handleFinish)
                 xhr.addEventListener('error', handleError)
                 xhr.addEventListener('abort', handleError)

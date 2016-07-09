@@ -24,7 +24,7 @@
     </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script lang="babel">
     import About from './about.vue'
     export default {
         data() {
