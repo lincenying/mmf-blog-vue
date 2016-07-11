@@ -1,8 +1,8 @@
 import {
+    GLOBAL_HIDEMSG,
     GLOBAL_LOADDING,
     GLOBAL_PROGRESS,
-    GLOBAL_SHOWMSG,
-    GLOBAL_HIDEMSG
+    GLOBAL_SHOWMSG
 } from '../mutation-types'
 
 const state = {

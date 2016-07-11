@@ -2,9 +2,9 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import global from './modules/global'
 import adminArticle from './modules/adminArticle'
 import article from './modules/article'
+import global from './modules/global'
 
 Vue.use(Vuex)
 Vue.config.debug = false

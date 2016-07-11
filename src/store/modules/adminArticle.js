@@ -1,8 +1,8 @@
 import {
-    RECEIVE_ADMIN_ARTICLE,
-    UPDATE_ADMIN_ARTICLE,
     DELETE_ARTICLE,
-    RECOVER_ARTICLE
+    RECEIVE_ADMIN_ARTICLE,
+    RECOVER_ARTICLE,
+    UPDATE_ADMIN_ARTICLE
 } from '../mutation-types'
 
 const state = {
@@ -14,19 +14,19 @@ const mutations = {
         state.article = data
     },
     [UPDATE_ADMIN_ARTICLE](state, data) {
-        let obj = state.article.list.find((i) => i.id === data.id)
-        for (let i in obj) {
+        const obj = state.article.list.find(i => i.id === data.id)
+        for (const i in obj) {
             if (obj.hasOwnProperty(i) ) {
                 obj[i] = data[i]
             }
         }
     },
     [DELETE_ARTICLE](state, id) {
-        let obj = state.article.list.find((i) => i.id === id)
+        const obj = state.article.list.find(i => i.id === id)
         obj.is_delete = 1
     },
     [RECOVER_ARTICLE](state, id) {
-        let obj = state.article.list.find((i) => i.id === id)
+        const obj = state.article.list.find(i => i.id === id)
         obj.is_delete = 0
     }
 }

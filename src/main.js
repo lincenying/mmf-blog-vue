@@ -7,10 +7,10 @@ import store from './store'
 import App from './App.vue'
 
 import index from './components/index.vue'
-import article from './components/article.vue'
+import adminEdit from './components/edit.vue'
 import adminList from './components/list.vue'
 import adminPost from './components/post.vue'
-import adminEdit from './components/edit.vue'
+import article from './components/article.vue'
 
 Vue.use(VueRouter)
 Vue.use(vueValidator)

@@ -1,6 +1,6 @@
-import store from 'store2'
-import api from '../api'
 import * as types from './mutation-types'
+import api from '../api'
+import store from 'store2'
 
 export const gLoadding = ({dispatch}, status) => {
     dispatch(types.GLOBAL_LOADDING, status)
@@ -11,7 +11,7 @@ export const gProgress = ({dispatch}, num) => {
 }
 
 export const showMsg = ({dispatch}, content, type = 'error') => {
-    dispatch(types.GLOBAL_SHOWMSG, {content: content, type: type})
+    dispatch(types.GLOBAL_SHOWMSG, {content, type})
 }
 
 export const hideMsg = ({dispatch}) => {
@@ -31,12 +31,12 @@ export const getArticleList = ({dispatch}, config) => {
             store(keyTime, nowTime)
             dispatch(types.RECEIVE_ARTICLE, data, config.page)
         })
-    } else {
-        return new Promise((resolve) => {
-            dispatch(types.RECEIVE_ARTICLE, list, config.page)
-            resolve('')
-        })
     }
+    return new Promise(resolve => {
+        dispatch(types.RECEIVE_ARTICLE, list, config.page)
+        resolve('')
+    })
+
 }
 export const getAdminArticle = ({dispatch}, config) => {
     return api.getFromConfig(config).then(({data}) => {
