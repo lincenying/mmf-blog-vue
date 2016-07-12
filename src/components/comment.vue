@@ -56,7 +56,7 @@
 </template>
 
 <script lang="babel">
-    import * as vuexAction from "../store/actions";
+    import * as vuexAction from "../store/actions"
     export default {
         vuex: {
             actions: vuexAction
@@ -72,7 +72,7 @@
         },
         methods: {
             postComment() {
-                if (this.form.content == '') {
+                if (this.form.content === '') {
                     this.showMsg('请输入评论内容!', 'error')
                 } else {
                     var request = $.ajax({
@@ -83,9 +83,9 @@
                             content: this.form.content,
                             username: this.form.username
                         }
-                    });
-                    request.then((json) => {
-                        if (json.code == 200) {
+                    })
+                    request.then(json => {
+                        if (json.code === 200) {
                             this.comments.list.push(json.data)
                             this.form.content = ''
                             this.form.username = ''
@@ -93,7 +93,7 @@
                         } else {
                             this.showMsg(json.message, 'error')
                         }
-                    });
+                    })
                 }
             }
         }

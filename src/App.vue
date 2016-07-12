@@ -58,22 +58,21 @@
         },
         computed: {
             visit() {
-                return this.$route.name == 'index' || this.$route.name == 'article' || this.$route.name == 'category' || this.$route.name == 'search'
+                return this.$route.name === 'index' || this.$route.name === 'article' || this.$route.name === 'category' || this.$route.name === 'search'
             }
         },
         methods: {
             search(e) {
-                var q = e.target.value
-                if (q == "") {
+                var qs = e.target.value
+                if (qs === "") {
                     return false
-                } else {
-                    this.$route.router.go({ name: 'search', params: { q: q }})
                 }
+                this.$route.router.go({ name: 'search', params: { qs }})
             }
         },
         watch: {
             'global.progress'(val) {
-                if (val != 100) {
+                if (val !== 100) {
                     NProgress.start()
                 } else {
                     NProgress.done()

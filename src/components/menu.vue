@@ -36,7 +36,7 @@
             About
         },
         ready() {
-            this.visit = this.$route.name == 'index' || this.$route.name == 'article' || this.$route.name == 'category'
+            this.visit = this.$route.name === 'index' || this.$route.name === 'article' || this.$route.name === 'category'
         }
     }
 </script>

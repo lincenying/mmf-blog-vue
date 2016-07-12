@@ -35,16 +35,16 @@
             }
         },
         filters: {
-            marked: marked
+            marked
         },
         methods: {
             open(e) {
                 this.showMore = !this.showMore
-                var $mPost = $(e.target).parents(".m-post");
-                var offset = $mPost.offset();
+                var $mPost = $(e.target).parents(".m-post")
+                var offset = $mPost.offset()
                 $("body").animate({
                     scrollTop: offset.top
-                }, 500 );
+                }, 500 )
             }
         }
     }

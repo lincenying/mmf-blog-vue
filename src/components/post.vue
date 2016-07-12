@@ -27,6 +27,7 @@
 </template>
 
 <script lang="babel">
+    /* global window, editormd, testEditor */
     import * as vuexAction from "../store/actions"
     import ajaxForm from './app/ajax-form.vue'
     import store from 'store2'
@@ -61,9 +62,9 @@
             onSubmit(e) {
                 this.$validate(true)
                 if (this.$post.invalid) {
-                    var msg = '';
+                    var msg = ''
                     this.$post.errors.map(i => {
-                        msg += i.message + "<br>";
+                        msg += i.message + "<br>"
                     })
                     this.showMsg(msg, 'error')
                     e.preventDefault()
@@ -91,7 +92,7 @@
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "./api.php?action=upload"
-            });
+            })
             this.gProgress(100)
         },
         route: {
@@ -104,7 +105,7 @@
         },
         validators: {
             editor() {
-                return $(this.el).val() != ''
+                return $(this.el).val() !== ''
             }
         }
     }

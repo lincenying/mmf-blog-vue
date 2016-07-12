@@ -28,6 +28,7 @@
 </template>
 
 <script lang="babel">
+    /* global editormd */
     import * as vuexAction from "../store/actions"
     import ajaxForm from './app/ajax-form.vue'
     import store from 'store2'
@@ -53,7 +54,7 @@
             },
             onFormComplete(el, res) {
                 this.gProgress(100)
-                if (res.code == 200) {
+                if (res.code === 200) {
                     this.showMsg(res.message, "success")
                     this.$route.router.go({ name: 'adminList', params: { page: this.$route.params.page }})
                 } else {
@@ -65,9 +66,9 @@
             onSubmit(e) {
                 this.$validate(true)
                 if (this.$edit.invalid) {
-                    var msg = '';
+                    var msg = ''
                     this.$post.errors.map(i => {
-                        msg += i.message + "<br>";
+                        msg += i.message + "<br>"
                     })
                     this.showMsg(msg, 'error')
                     e.preventDefault()
@@ -80,15 +81,15 @@
                 type: "POST",
                 dataType: 'json',
                 url: "api.php?action=getArticle&id=" + id
-            });
-            request.then((json) => {
+            })
+            request.then(json => {
                 this.id = json.data.id
                 this.title = json.data.title
                 this.category = json.data.category
                 this.content = json.data.content
 
                 this.$nextTick(() => {
-                    var testEditor = editormd("post-content", {
+                    editormd("post-content", {
                         width: "100%",
                         height: 500,
                         placeholder: '请输入内容...',
@@ -108,10 +109,10 @@
                         imageUpload : true,
                         imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                         imageUploadURL : "./api.php?action=upload"
-                    });
+                    })
                 })
                 this.gProgress(100)
-            });
+            })
         },
         route: {
             data() {
@@ -123,7 +124,7 @@
         },
         validators: {
             editor() {
-                return $(this.el).val() != ''
+                return $(this.el).val() !== ''
             }
         }
     }

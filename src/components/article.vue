@@ -36,7 +36,6 @@
     import marked from 'marked'
     import comment from './comment.vue'
     import hljs from 'highlight.js'
-    import { ua } from '../tools/ua'
     marked.setOptions({
         highlight(code) {
             return hljs.highlightAuto(code).value
@@ -61,7 +60,7 @@
             }
         },
         filters: {
-            marked: marked
+            marked
         },
         methods: {
             loadcomment() {
@@ -70,15 +69,15 @@
                     type: "POST",
                     dataType: 'json',
                     url: "api.php?action=comment&id=" + id + "&page=" + this.comments.page
-                }).then((json) => {
-                    if (this.comments.page == 1) {
+                }).then(json => {
+                    if (this.comments.page === 1) {
                         this.comments.list = [].concat(json.data.list)
                     } else {
                         this.comments.list = this.comments.list.concat(json.data.list)
                     }
                     this.comments.hasNext = json.data.hasNext
                     this.comments.page++
-                });
+                })
             }
         },
         ready() {
@@ -88,12 +87,12 @@
                 type: "POST",
                 dataType: 'json',
                 url: "api.php?action=article&id=" + id
-            });
-            request.then((json) => {
+            })
+            request.then(json => {
                 this.gProgress(100)
                 this.article = json.data
                 this.loadcomment()
-            });
+            })
         },
         route: {
             canReuse() {

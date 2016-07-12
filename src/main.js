@@ -1,3 +1,5 @@
+/* global window */
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
@@ -31,7 +33,7 @@ router.map({
         name: 'category',
         component: index
     },
-    '/search/:q': {
+    '/search/:qs': {
         name: 'search',
         component: index
     },

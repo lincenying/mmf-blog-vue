@@ -32,25 +32,25 @@
         },
         computed: {
             curPage() {
-                return parseInt(this.$route.params.page)
+                return parseInt(this.$route.params.page, 10)
             },
             prevPage() {
-                return parseInt(this.$route.params.page) - 1
+                return parseInt(this.$route.params.page, 10) - 1
             },
             nextPage() {
-                return parseInt(this.$route.params.page) + 1
+                return parseInt(this.$route.params.page, 10) + 1
             }
         },
         methods: {
             mdel(id) {
                 this.deleteArticle({
-                    id: id,
+                    id,
                     action: 'delete'
                 })
             },
             recover(id) {
                 this.recoverArticle({
-                    id: id,
+                    id,
                     action: 'recover'
                 })
             }
@@ -65,7 +65,7 @@
                     this.getAdminArticle({
                         action: 'getAdminArticle',
                         limit: 20,
-                        page: page
+                        page
                     })
                 ]).then(() => {
                     this.gProgress(100)

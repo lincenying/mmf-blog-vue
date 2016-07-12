@@ -22,6 +22,7 @@
     </div>
 </template>
 <script lang="babel">
+    /* global window */
     import '../html/css/login.css'
     import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
     import * as Action from "./store/actions"

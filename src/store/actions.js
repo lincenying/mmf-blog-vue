@@ -25,7 +25,7 @@ export const getArticleList = ({dispatch}, config) => {
         list = store(key),
         listTime = store(keyTime),
         nowTime = new Date().getTime()
-    if (config.q || !list || !listTime || nowTime > listTime + 600000) {
+    if (config.qs || !list || !listTime || nowTime > listTime + 600000) {
         return api.getFromConfig(config).then(({data}) => {
             store(key, data)
             store(keyTime, nowTime)
