@@ -7,6 +7,7 @@
                 <a href="javascript:;" class="w-icon2">&nbsp;</a>
                 <div class="info">
                     <a href="javascript:;" v-text="article.creat_date"></a>
+                    <a href="javascript:;">浏览: {{ article.visit }}</a>
                     <a href="javascript:;" class="comnum" v-text="article.comment_count"></a>
                 </div>
                 <div class="cont cont-1">

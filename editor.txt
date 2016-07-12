@@ -1,46 +1,16 @@
-simditor.js
-
-line 4441:
-
-img_path = "http://7xso5y.com2.z0.glb.clouddn.com/" + result.key;
-
-uploader.js
-
-line 136:
-
-v = ref[k];
-if (k == 'key') {
-
-    v = v.replace('.jpg', '_'+file.id+'.jpg');
-
-}
-
 highlight
 
 var hljs = require('./highlight');
 
-
-
 hljs.registerLanguage('xml', require('./languages/xml'));
-
 hljs.registerLanguage('coffeescript', require('./languages/coffeescript'));
-
 hljs.registerLanguage('css', require('./languages/css'));
-
 hljs.registerLanguage('markdown', require('./languages/markdown'));
-
 hljs.registerLanguage('htmlbars', require('./languages/htmlbars'));
-
 hljs.registerLanguage('javascript', require('./languages/javascript'));
-
 hljs.registerLanguage('json', require('./languages/json'));
-
 hljs.registerLanguage('less', require('./languages/less'));
-
 hljs.registerLanguage('scss', require('./languages/scss'));
-
 hljs.registerLanguage('stylus', require('./languages/stylus'));
-
-
 
 module.exports = hljs;
