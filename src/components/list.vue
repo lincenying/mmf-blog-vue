@@ -21,7 +21,7 @@
 
 <script lang="babel">
     import * as vuexAction from "../store/actions"
-    import store from 'store2'
+    import ls from 'store2'
     import cookies from 'js-cookie'
     export default {
         vuex: {
@@ -57,7 +57,7 @@
         },
         route: {
             data({to: {params: { page }}}) {
-                var token = store.get('token') && cookies.get('user')
+                var token = ls.get('token') && cookies.get('user')
                 if (!token) {
                     this.$route.router.go({ name: 'index'})
                 }

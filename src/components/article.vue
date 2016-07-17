@@ -90,8 +90,8 @@
                 url: "api.php?action=article&id=" + id
             })
             request.then(json => {
-                this.gProgress(100)
                 this.article = json.data
+                this.gProgress(100)
                 this.loadcomment()
             })
         },

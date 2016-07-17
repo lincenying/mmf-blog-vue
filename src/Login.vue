@@ -26,7 +26,7 @@
     import '../html/css/login.css'
     import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
     import * as Action from "./store/actions"
-    import store from 'store2'
+    import ls from 'store2'
     import Toaster from './components/app/toaster.vue'
     import ajaxForm from './components/app/ajax-form.vue'
     export default {
@@ -57,7 +57,7 @@
                 this.gLoadding(false)
                 if (res.code === 200) {
                     this.showMsg("操作成功", "success")
-                    store.set("token", res.data)
+                    ls.set("token", res.data)
                     setTimeout(() => {
                         window.location.href = "/#!/post"
                     }, 1000)

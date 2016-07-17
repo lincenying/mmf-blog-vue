@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
 import vueValidator from 'vue-validator'
 import store from './store'
+import ls from 'store2'
 
 import App from './App.vue'
 
@@ -60,10 +61,12 @@ router.map({
 
 sync(store, router)
 
-router.beforeEach(() => {
+router.beforeEach(transition => {
+    if (transition.from.path) {
+        ls.set(transition.from.path, document.body.scrollTop)
+    }
     store.dispatch('GLOBAL_PROGRESS', 30)
+    transition.next()
 })
-router.afterEach(() => {
-    window.scrollTo(0, 0)
-})
+
 router.start(App, '#app')

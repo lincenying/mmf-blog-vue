@@ -6,7 +6,7 @@
                 <div class="s-fc0 ztag ztag_tips">由于该用户的权限设置，您暂时无法进行评论...</div>
                 <div class="bcmtadd">
                     <input v-model="form.username" type="text" class="form-control" placeholder="请输入昵称">
-                    <textarea v-model="form.content" class="form-control" placeholder="请输入评论内容"></textarea>
+                    <textarea id="content" v-model="form.content" class="form-control" placeholder="请输入评论内容"></textarea>
                     <div class="bcmtbtn">
                         <span class="ztag ztag_tips">提示</span>
                         <button @click="postComment" class="s-bd1 s-fc1 s-bg1 ztag">发布</button>
@@ -35,7 +35,7 @@
                                                 </div>
                                             </div>
                                             <div class="bcmtlsth">
-                                                <a class="s-fc2 itag" href="javascript:;" style="visibility: hidden;">删除</a><a class="s-fc2 itag" style="visibility: hidden;" href="javascript:;">回复</a>
+                                                <a class="s-fc2 itag" href="javascript:;" style="visibility: hidden;">删除</a><a @click="reply(item)" class="s-fc2 itag" href="javascript:;">回复</a>
                                             </div>
                                         </div>
                                     </div>
@@ -95,6 +95,10 @@
                         }
                     })
                 }
+            },
+            reply(item) {
+                this.form.content = '回复 @'+ item.username + ': '
+                document.querySelector("#content").focus()
             }
         }
     }

@@ -1,13 +1,20 @@
+import Vue from 'vue'
 import * as types from './mutation-types'
 import api from '../api'
-import store from 'store2'
+import ls from 'store2'
 
 export const gLoadding = ({dispatch}, status) => {
     dispatch(types.GLOBAL_LOADDING, status)
 }
 
-export const gProgress = ({dispatch}, num) => {
+export const gProgress = ({dispatch, state: {route: {path}}}, num) => {
     dispatch(types.GLOBAL_PROGRESS, num)
+    var scrollTop = ls.get(path)
+    if (num === 100 && scrollTop) {
+        Vue.nextTick(function () {
+            window.scrollTo(0, scrollTop)
+        })
+    }
 }
 
 export const showMsg = ({dispatch}, content, type = 'error') => {
@@ -22,13 +29,13 @@ export const getArticleList = ({dispatch}, config) => {
     var id = (config.id ? config.id : '0') + '_' + (config.page ? config.page : '1'),
         key = 'getArticleList_' + id,
         keyTime = 'getArticleList_Time_' + id,
-        list = store(key),
-        listTime = store(keyTime),
+        list = ls(key),
+        listTime = ls(keyTime),
         nowTime = new Date().getTime()
     if (config.qs || !list || !listTime || nowTime > listTime + 600000) {
         return api.getFromConfig(config).then(({data}) => {
-            store(key, data)
-            store(keyTime, nowTime)
+            ls(key, data)
+            ls(keyTime, nowTime)
             dispatch(types.RECEIVE_ARTICLE, data, config.page)
         })
     }
