@@ -1,6 +1,11 @@
 {
     "globals": {
-        "$": true
+        "$": true,
+        "_": true,
+        "window": true,
+        "document": true,
+        "navigator": true,
+        "Vue": true
     },
     "env": {
         "es6": true,
