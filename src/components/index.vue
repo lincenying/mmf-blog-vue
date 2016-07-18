@@ -30,13 +30,8 @@
                 return ua() === "PC"
             }
         },
-        data () {
-            return {
-                page: 1
-            }
-        },
         methods: {
-            loadMore(page = this.page) {
+            loadMore(page = this.article.page) {
                 var id = this.$route.params.id || ""
                 var qs = this.$route.params.qs || ""
                 Promise.all([
@@ -48,14 +43,13 @@
                         page
                     })
                 ]).then(() => {
-                    this.gProgress(100)
-                    this.page++
+                    if (page === 1) this.gProgress(100)
                 })
             }
         },
         ready() {
-            this.page = 1
-            this.loadMore()
+            if (this.article.list.length <= 0 || this.$route.path !== this.article.path) this.loadMore(1)
+            else this.gProgress(100)
         },
         route: {
             canReuse() {
