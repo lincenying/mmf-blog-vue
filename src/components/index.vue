@@ -14,7 +14,7 @@
 <script lang="babel">
     import * as vuexAction from "../store/actions"
     import indexPost from './index-post.vue'
-    import { ua } from '../tools/ua'
+    import { ua } from '../tools/command'
     export default {
         vuex: {
             getters: {
