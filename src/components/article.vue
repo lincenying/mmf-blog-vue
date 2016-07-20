@@ -22,9 +22,9 @@
         <div class="box m-page box-do">
             <div class="w-icon w-icon-2"></div>
             <div class="w-icon w-icon-3"></div>
-            <a v-if="article.prev_id" v-link="{ name: 'article', params: { id: article.prev_id }, force: true}" id="__prev_permalink__" class="prev">上一篇</a>
+            <a v-if="prev.prev_id" v-link="{ name: 'article', params: { id: prev.prev_id }, force: true}" id="__prev_permalink__" class="prev">上一篇</a>
             <span v-else class="prev">上一篇</span>
-            <a v-if="article.next_id" v-link="{ name: 'article', params: { id: article.next_id }, force: true}" id="__next_permalink__" class="next">下一篇</a>
+            <a v-if="next.next_id" v-link="{ name: 'article', params: { id: next.next_id }, force: true}" id="__next_permalink__" class="next">下一篇</a>
             <span v-else class="next">下一篇</span>
         </div>
         <comment :id="article._id" :comments="comments" :loadcomment="loadcomment"></comment>
@@ -53,6 +53,8 @@
         data () {
             return {
                 article: null,
+                next: null,
+                prev: null,
                 comments: {
                     list: [],
                     hasNext: 0,
@@ -91,6 +93,8 @@
             })
             request.then(json => {
                 this.article = json.data
+                this.prev = json.prev
+                this.next = json.next
                 this.gProgress(100)
                 this.loadcomment()
             })
