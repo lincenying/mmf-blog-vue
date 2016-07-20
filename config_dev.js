@@ -12,11 +12,11 @@ module.exports = {
     dev: {
         port: 8080,
         proxyTable: {
-            '/api.php': {
-                target: 'http://www.mmxiaowu.com',
+            '/api': {
+                target: 'http://localhost:3000',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api.php': '/api.php'
+                    '^/api': '/api'
                 }
             }
         }

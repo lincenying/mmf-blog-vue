@@ -50,7 +50,7 @@ app.use(function(err, req, res, next) {
     res.send(err.message)
 })
 
-var port = 8080
+var port = 3000
 app.listen(port, function(err) {
     if (err) {
         console.log(err)
