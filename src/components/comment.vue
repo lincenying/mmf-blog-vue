@@ -78,7 +78,7 @@
                     var request = $.ajax({
                         type: "POST",
                         dataType: 'json',
-                        url: "api.php?action=postcomment&id=" + this.id,
+                        url: "api?action=postcomment&id=" + this.id,
                         data: {
                             content: this.form.content,
                             username: this.form.username

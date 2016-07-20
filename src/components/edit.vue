@@ -2,7 +2,7 @@
     <div class="g-mn">
         <div class="box">
             <validator name="edit">
-                <ajax-form id="article-post" action="/api.php?action=modify" method="post">
+                <ajax-form id="article-post" action="/api?action=modify" method="post">
                     <section id="post-title">
                         <input v-model="title" v-validate:title="{ required: true }" type="text" name="title" class="form-control" placeholder="请输入标题">
                     </section>
@@ -80,10 +80,10 @@
             var request = $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "api.php?action=getArticle&id=" + id
+                url: "api?action=getArticle&id=" + id
             })
             request.then(json => {
-                this.id = json.data.id
+                this.id = json.data._id
                 this.title = json.data.title
                 this.category = json.data.category
                 this.content = json.data.content
@@ -108,7 +108,7 @@
                         saveHTMLToTextarea : true,
                         imageUpload : true,
                         imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                        imageUploadURL : "./api.php?action=upload"
+                        imageUploadURL : "./api?action=upload"
                     })
                 })
                 this.gProgress(100)

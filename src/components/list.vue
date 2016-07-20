@@ -3,10 +3,10 @@
         <div class="box">
             <ul class="list-group">
                 <li v-for="item in article.list" class="list-group-item">
-                    <a v-link="{ name: 'article', params: { id: item.id }}" target="_blank" v-text="item.title"></a>
-                    <a v-if="item.is_delete == 0" @click="mdel(item.id)" href="javascript:;" class="badge badge-danger">删除</a>
-                    <a v-else @click="recover(item.id)" href="javascript:;" class="badge badge-info">恢复</a>
-                    <a v-link="{ name: 'adminEdit', params: { id: item.id, page: curPage }}" class="badge badge-success">编辑</a>
+                    <a v-link="{ name: 'article', params: { id: item._id }}" target="_blank" v-text="item.title"></a>
+                    <a v-if="item.is_delete == 0" @click="mdel(item._id)" href="javascript:;" class="badge badge-danger">删除</a>
+                    <a v-else @click="recover(item._id)" href="javascript:;" class="badge badge-info">恢复</a>
+                    <a v-link="{ name: 'adminEdit', params: { id: item._id, page: curPage }}" class="badge badge-success">编辑</a>
                 </li>
             </ul>
         </div>

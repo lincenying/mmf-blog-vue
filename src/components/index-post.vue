@@ -7,7 +7,7 @@
         </div>
         <div class="cont cont-1">
             <div class="text">
-                <h2><a v-link="{ name: 'article', params: { id: item.id }}" v-text="item.title"></a></h2>
+                <h2><a v-link="{ name: 'article', params: { id: item._id }}" v-text="item.title"></a></h2>
                 <div v-if="ispc" class="markdown-body" :class="!showMore ? 'showless' : ''" v-html="item.content | marked"></div>
                 <div v-if="ispc" class="more-less">
                     <a v-if="!showMore" @click="open($event)" class="more" href="javascript:;">展开 ↓</a>

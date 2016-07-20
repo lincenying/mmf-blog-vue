@@ -12,7 +12,7 @@
                 </div>
                 <div class="cont cont-1">
                     <div class="text">
-                        <h2><a v-link="{ name: 'article', params: { id: article.id }}" v-text="article.title"></a></h2>
+                        <h2><a v-link="{ name: 'article', params: { id: article._id }}" v-text="article.title"></a></h2>
                         <div class="markdown-body" v-html="article.content | marked"></div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
             <a v-if="article.next_id" v-link="{ name: 'article', params: { id: article.next_id }, force: true}" id="__next_permalink__" class="next">下一篇</a>
             <span v-else class="next">下一篇</span>
         </div>
-        <comment :id="article.id" :comments="comments" :loadcomment="loadcomment"></comment>
+        <comment :id="article._id" :comments="comments" :loadcomment="loadcomment"></comment>
     </template>
     </div>
 </template>
@@ -69,7 +69,7 @@
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
-                    url: "api.php?action=comment&id=" + id + "&page=" + this.comments.page
+                    url: "api?action=comment&id=" + id + "&page=" + this.comments.page
                 }).then(json => {
                     if (this.comments.page === 1) {
                         this.comments.list = [].concat(json.data.list)
@@ -87,7 +87,7 @@
             var request = $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "api.php?action=article&id=" + id
+                url: "api?action=article&id=" + id
             })
             request.then(json => {
                 this.article = json.data

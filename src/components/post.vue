@@ -2,7 +2,7 @@
     <div class="g-mn">
         <div class="box">
             <validator name="post">
-                <ajax-form id="article-post" action="/api.php?action=post" method="post">
+                <ajax-form id="article-post" action="/api" method="post">
                     <section id="post-title">
                         <input v-model="title" v-validate:title="{ required: { rule: true, message: '请输入标题!' } }" type="text" name="title" class="form-control" placeholder="请输入标题">
                     </section>
@@ -18,6 +18,7 @@
                         <textarea v-model="content" v-validate:content="{ editor: { rule: true, message: '请输入内容!' } }" id="editor" name="content" class="form-control hidden" data-autosave="editor-content"></textarea>
                     </section>
                     <section id="post-submit">
+                        <input type="hidden" name="action" value="post">
                         <button @click="onSubmit" class="btn btn-success">发布</button>
                     </section>
                 </ajax-form>
@@ -54,8 +55,10 @@
             onFormComplete(el, res) {
                 this.gProgress(100)
                 this.showMsg(res.message, res.code === 200 ? "success" : 'error')
-                $("#article-post").get(0).reset()
-                testEditor.clear()
+                if (res.code === 200) {
+                    $("#article-post").get(0).reset()
+                    testEditor.clear()
+                }
             }
         },
         methods: {
@@ -91,7 +94,7 @@
                 saveHTMLToTextarea : true,
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "./api.php?action=upload"
+                imageUploadURL : "./api?action=upload"
             })
             this.gProgress(100)
         },
