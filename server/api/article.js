@@ -93,7 +93,7 @@ exports.getArticleList = (req, res) => {
         },
         skip = (page - 1) * limit
     if (id) {
-        data.categroup = id
+        data.category = id
     }
     if (qs) {
         var reg = new RegExp(qs, 'i')
