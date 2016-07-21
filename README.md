@@ -13,3 +13,10 @@ npm run server
 
 // 启动 开发模式
 npm run dev
+```
+
+添加管理员
+http://localhost:3000/admin
+
+登录
+http://localhost:3000/login

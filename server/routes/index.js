@@ -17,12 +17,17 @@ router.get('/login', (req, res) => {
     res.render('login.html', { title: '登录' })
 })
 
+// 添加管理员
+router.get('/admin', (req, res) => {
+    user.insertUser(req, res)
+})
+
 // API
 router.post('/api', multipartMiddleware, (req, res, next) => {
     var action = req.query.action || req.body.action
     var articleArray = ['getAdminArticle', 'getArticle', 'getArticleList', 'article', 'post', 'delete', 'recover', 'modify', ],
         commentArrat = ['postComment', 'comment'],
-        userArray = ['insertUser', 'login']
+        userArray = ['login']
     if (userArray.indexOf(action) > -1) {
         user[action](req, res, next)
     } else if (articleArray.indexOf(action) > -1) {

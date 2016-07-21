@@ -4,16 +4,12 @@ var md5 = require('md5')
 
 exports.insertUser = (req, res, next) => {
     User.createAsync({
-        username: 'lcy',
-        password: md5('113511000'),
+        username: 'admin',
+        password: md5('123456'),
         leval: 9
     })
-    .then(result => {
-        return res.json({
-            code: 200,
-            user_id: result._id,
-            message: '添加用户成功'
-        })
+    .then(() => {
+        res.send('添加用户成功: admin, 密码: 123456')
     }).catch(err => next(err))
 }
 
