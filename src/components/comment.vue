@@ -78,7 +78,7 @@
                     var request = $.ajax({
                         type: "POST",
                         dataType: 'json',
-                        url: "api?action=postComment",
+                        url: "/api/?action=postComment",
                         data: {
                             id: this.id,
                             content: this.form.content,

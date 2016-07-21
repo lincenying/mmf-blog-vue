@@ -1,7 +1,7 @@
 /* global $ */
 export function ajaxSetup() {
     $.ajaxSetup({
-        url: '/api',
+        url: '/api/',
         global: false,
         type: 'POST',
         dataType: 'json',

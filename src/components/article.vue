@@ -71,7 +71,7 @@
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
-                    url: "api?action=comment&id=" + id + "&page=" + this.comments.page
+                    url: "/api/?action=comment&id=" + id + "&page=" + this.comments.page
                 }).then(json => {
                     if (this.comments.page === 1) {
                         this.comments.list = [].concat(json.data.list)
@@ -89,7 +89,7 @@
             var request = $.ajax({
                 type: "POST",
                 dataType: 'json',
-                url: "api?action=article&id=" + id
+                url: "/api/?action=article&id=" + id
             })
             request.then(json => {
                 this.article = json.data

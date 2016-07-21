@@ -2,7 +2,7 @@
     <div class="g-mn">
         <div class="box">
             <validator name="post">
-                <ajax-form id="article-post" action="/api" method="post">
+                <ajax-form id="article-post" action="/api/" method="post">
                     <section id="post-title">
                         <input v-model="title" v-validate:title="{ required: { rule: true, message: '请输入标题!' } }" type="text" name="title" class="form-control" placeholder="请输入标题">
                     </section>
@@ -94,7 +94,7 @@
                 saveHTMLToTextarea : true,
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "./api?action=upload"
+                imageUploadURL : "/api/?action=upload"
             })
             this.gProgress(100)
         },
