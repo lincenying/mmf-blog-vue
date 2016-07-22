@@ -49,11 +49,7 @@
             }
         },
         events: {
-            beforeFormSubmit() {
-                this.gProgress(30)
-            },
             onFormComplete(el, res) {
-                this.gProgress(100)
                 this.showMsg(res.message, res.code === 200 ? "success" : 'error')
                 if (res.code === 200) {
                     $("#article-post").get(0).reset()
@@ -96,7 +92,6 @@
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/api/?action=upload"
             })
-            this.gProgress(100)
         },
         route: {
             data() {

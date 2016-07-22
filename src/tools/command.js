@@ -13,10 +13,10 @@ export const ua = () => {
     }
     return flag
 }
-export const ssp = (path, num) => {
+export const ssp = path => {
     var clientHeight = document.documentElement.clientHeight,
         scrollTop = ls.get(path)
-    if (num === 100 && scrollTop) {
+    if (scrollTop) {
         Vue.nextTick(() => {
             if (document.body.clientHeight >= scrollTop + clientHeight) {
                 window.scrollTo(0, scrollTop)

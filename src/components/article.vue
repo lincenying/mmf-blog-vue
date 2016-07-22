@@ -95,7 +95,6 @@
                 this.article = json.data
                 this.prev = json.prev
                 this.next = json.next
-                this.gProgress(100)
                 this.loadcomment()
             })
         },

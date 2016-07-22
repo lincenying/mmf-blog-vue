@@ -67,9 +67,7 @@
                         limit: 20,
                         page
                     })
-                ]).then(() => {
-                    this.gProgress(100)
-                })
+                ])
             }
         }
     }

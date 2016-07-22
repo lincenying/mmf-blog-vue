@@ -49,11 +49,7 @@
             }
         },
         events: {
-            beforeFormSubmit() {
-                this.gProgress(30)
-            },
             onFormComplete(el, res) {
-                this.gProgress(100)
                 if (res.code === 200) {
                     this.showMsg(res.message, "success")
                     this.$route.router.go({ name: 'adminList', params: { page: this.$route.params.page }})
@@ -111,7 +107,6 @@
                         imageUploadURL : "/api/?action=upload"
                     })
                 })
-                this.gProgress(100)
             })
         },
         route: {

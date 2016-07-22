@@ -14,7 +14,7 @@
 <script lang="babel">
     import * as vuexAction from "../store/actions"
     import indexPost from './index-post.vue'
-    import { ua } from '../tools/command'
+    import { ua, ssp } from '../tools/command'
     export default {
         vuex: {
             getters: {
@@ -43,13 +43,13 @@
                         page
                     })
                 ]).then(() => {
-                    if (page === 1) this.gProgress(100)
+                    if (page === 1) ssp(this.$route.path)
                 })
             }
         },
         ready() {
             if (this.article.list.length <= 0 || this.$route.path !== this.article.path) this.loadMore(1)
-            else this.gProgress(100)
+            else ssp(this.$route.path)
         },
         route: {
             canReuse() {
