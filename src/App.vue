@@ -31,6 +31,10 @@
         <span class="beian"><i></i> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602003638">浙公网安备 33010602003638号</a></span>
     </div>
     <Toaster></Toaster>
+    <div class="arrow">
+        <a class="go-top" href="javascript:;" @click="goTop"></a>
+        <a class="go-back" href="javascript:;" @click="goBack"></a>
+    </div>
 </div>
 </template>
 <script lang="babel">
@@ -62,6 +66,12 @@
             }
         },
         methods: {
+            goBack() {
+                window.history.go(-1)
+            },
+            goTop() {
+                window.scrollTo(0, 0)
+            },
             search(e) {
                 var qs = e.target.value
                 if (qs === "") {

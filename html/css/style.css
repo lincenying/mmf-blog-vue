@@ -849,13 +849,39 @@ textarea.form-control {
     z-index: 20
 }
 
+.arrow {
+    position: fixed;
+    width: 50px;
+    height: 120px;
+    bottom: 100px;
+    left: 50%;
+    margin-left: 430px;
+}
+.arrow a {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url(../images/arrow.jpg) no-repeat;
+}
+.arrow .go-top {
+    background-position: 0 0;
+}
+.arrow .go-top:hover {
+    background-position: -50px 0;
+}
+.arrow .go-back {
+    background-position: 0 -50px;
+}
+.arrow .go-back:hover {
+    background-position: -50px -50px;
+}
 @media screen and (max-width: 860px) {
     .g-doc {
         width: 100%;
     }
 }
 @media screen and (max-width: 620px) {
-    .m-sch {
+    .m-sch, .arrow {
         display: none;
     }
     .m-nav {
