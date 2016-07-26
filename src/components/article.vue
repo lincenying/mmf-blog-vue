@@ -34,6 +34,7 @@
 
 <script lang="babel">
     import * as vuexAction from "../store/actions"
+    import api from '../api'
     import marked from 'marked'
     import comment from './comment.vue'
     import hljs from 'highlight.js'
@@ -66,37 +67,35 @@
             marked
         },
         methods: {
-            loadcomment() {
+            async loadcomment() {
                 var id = this.$route.params.id
-                $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: "/api/?action=comment&id=" + id + "&page=" + this.comments.page
-                }).then(json => {
-                    if (this.comments.page === 1) {
-                        this.comments.list = [].concat(json.data.list)
-                    } else {
-                        this.comments.list = this.comments.list.concat(json.data.list)
-                    }
-                    this.comments.hasNext = json.data.hasNext
-                    this.comments.page++
+                var json = await api.getData({
+                    action: 'comment',
+                    id,
+                    page: this.comments.page
                 })
+                if (this.comments.page === 1) {
+                    this.comments.list = [].concat(json.data.list)
+                } else {
+                    this.comments.list = this.comments.list.concat(json.data.list)
+                }
+                this.comments.hasNext = json.data.hasNext
+                this.comments.page++
             }
         },
         ready() {
-            var id = this.$route.params.id
-            this.comments.page = 1
-            var request = $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: "/api/?action=article&id=" + id
-            })
-            request.then(json => {
+            (async () => {
+                var id = this.$route.params.id
+                this.comments.page = 1
+                var json = await api.getFromConfig({
+                    action: 'article',
+                    id
+                })
                 this.article = json.data
                 this.prev = json.prev
                 this.next = json.next
                 this.loadcomment()
-            })
+            })()
         },
         route: {
             canReuse() {

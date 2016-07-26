@@ -31,25 +31,26 @@
             }
         },
         methods: {
-            loadMore(page = this.article.page) {
+            async loadMore(page = this.article.page) {
                 var id = this.$route.params.id || ""
                 var qs = this.$route.params.qs || ""
-                Promise.all([
-                    this.getArticleList({
-                        action: 'getArticleList',
-                        limit: 10,
-                        id,
-                        qs,
-                        page
-                    })
-                ]).then(() => {
-                    if (page === 1) ssp(this.$route.path)
+                await this.getArticleList({
+                    action: 'getArticleList',
+                    id,
+                    qs,
+                    page,
+                    limit: 10
                 })
+                if (page === 1) ssp(this.$route.path)
             }
         },
         ready() {
-            if (this.article.list.length <= 0 || this.$route.path !== this.article.path) this.loadMore(1)
-            else ssp(this.$route.path)
+            if (this.article.list.length <= 0 || this.$route.path !== this.article.path) {
+                this.loadMore(1)
+            } else {
+                ssp(this.$route.path)
+                this.gProgress(100)
+            }
         },
         route: {
             canReuse() {

@@ -2,12 +2,11 @@
     <section class="container">
         <div class="login">
             <h1>后台管理</h1>
-            <ajax-form id="shake-setting" action="/api" method="post">
+            <ajax-form id="shake-setting" action="/api/?action=login" method="post">
                 <p><input v-model="form.username" type="text" name="username" value="" placeholder="请输入用户名"></p>
                 <p><input v-model="form.password" type="password" name="password" value="" placeholder="请输入密码"></p>
                 <p class="remember_me">
                     <label>
-                        <input type="hidden" name="action" value="login">
                         <input v-model="form.remember_me" type="checkbox" name="remember_me" id="remember_me">
                         保持登录
                     </label>

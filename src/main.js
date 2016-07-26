@@ -66,6 +66,7 @@ router.beforeEach(transition => {
     if (transition.from.path) {
         ls.set(transition.from.path, scrollTop)
     }
+    store.dispatch('GLOBAL_PROGRESS', 0)
     transition.next()
 })
 

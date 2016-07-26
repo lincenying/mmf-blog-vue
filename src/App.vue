@@ -82,10 +82,14 @@
         },
         watch: {
             'global.progress'(val) {
-                if (val !== 100) {
+                if (val === 0) {
+                    NProgress.set(0)
                     NProgress.start()
-                } else {
+                } else if (val === 100) {
                     NProgress.done()
+                } else {
+                    NProgress.set(val/100)
+                    NProgress.start()
                 }
             }
         }

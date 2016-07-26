@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Login from './Login.vue'
 import store from './store'
 
-var vm = new Vue({
+/* eslint-disable no-new */
+new Vue({
     el: '#app',
     store,
     components: {

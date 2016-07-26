@@ -30,6 +30,7 @@
 <script lang="babel">
     /* global editormd */
     import * as vuexAction from "../store/actions"
+    import api from '../api'
     import ajaxForm from './app/ajax-form.vue'
     import ls from 'store2'
     import cookies from 'js-cookie'
@@ -72,13 +73,12 @@
             }
         },
         ready() {
-            var id = this.$route.params.id
-            var request = $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: "/api/?action=getArticle&id=" + id
-            })
-            request.then(json => {
+            (async () => {
+                var id = this.$route.params.id
+                var json = await api.getFromConfig({
+                    action: 'getArticle',
+                    id
+                })
                 this.id = json.data._id
                 this.title = json.data.title
                 this.category = json.data.category
@@ -107,7 +107,7 @@
                         imageUploadURL : "/api/?action=upload"
                     })
                 })
-            })
+            })()
         },
         route: {
             data() {

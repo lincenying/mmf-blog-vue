@@ -57,6 +57,7 @@
 
 <script lang="babel">
     import * as vuexAction from "../store/actions"
+    import api from '../api'
     export default {
         vuex: {
             actions: vuexAction
@@ -71,30 +72,24 @@
             }
         },
         methods: {
-            postComment() {
+            async postComment() {
                 if (this.form.content === '') {
                     this.showMsg('请输入评论内容!', 'error')
                 } else {
-                    var request = $.ajax({
-                        type: "POST",
-                        dataType: 'json',
-                        url: "/api/?action=postComment",
-                        data: {
-                            id: this.id,
-                            content: this.form.content,
-                            username: this.form.username
-                        }
+                    var json = await api.getData({
+                        action: 'postComment',
+                        id: this.id,
+                        content: this.form.content,
+                        username: this.form.username
                     })
-                    request.then(json => {
-                        if (json.code === 200) {
-                            this.comments.list.push(json.data)
-                            this.form.content = ''
-                            this.form.username = ''
-                            this.showMsg(json.message, "success")
-                        } else {
-                            this.showMsg(json.message, 'error')
-                        }
-                    })
+                    if (json.code === 200) {
+                        this.comments.list.push(json.data)
+                        this.form.content = ''
+                        this.form.username = ''
+                        this.showMsg(json.message, "success")
+                    } else {
+                        this.showMsg(json.message, 'error')
+                    }
                 }
             },
             reply(item) {
