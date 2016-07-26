@@ -12,7 +12,7 @@ module.exports = {
         app: './src/main.js',
         login: './src/login.js',
         vendor: [
-            'vue', 'vue-router', 'vuex', 'vuex-router-sync'
+            'vue', 'vue-router', 'vuex', 'vuex-router-sync', 'vue-validator'
         ]
     },
     output: {
