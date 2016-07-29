@@ -14,6 +14,7 @@ npm run server
 // 启动 开发模式
 npm run dev
 ```
+#### 使用api服务器访问:
 
 添加管理员
 http://localhost:3000/admin
@@ -21,8 +22,16 @@ http://localhost:3000/admin
 登录
 http://localhost:3000/login
 
+#### 使用开发模式访问:
 
-# 注意: 
+添加管理员
+http://localhost:8000/admin
+
+登录
+http://localhost:8000/login
+
+
+# 注意:
 如果打开上面的页面出现找不到jquery的情况, 请把build/build.js文件中的
 
 `cp('-R', 'static/', assetsPath)`
