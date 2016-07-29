@@ -20,3 +20,15 @@ http://localhost:3000/admin
 
 登录
 http://localhost:3000/login
+
+
+# 注意: 
+如果打开上面的页面出现找不到jquery的情况, 请把build/build.js文件中的
+
+`cp('-R', 'static/', assetsPath)`
+
+改成
+
+`cp('-R', 'static/*', assetsPath)`
+
+然后重新运行`npm run build`
