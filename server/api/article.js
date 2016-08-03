@@ -130,8 +130,10 @@ exports.getArticleList = (req, res) => {
  * @param  {[type]} res [description]
  * @return {[type]}     [description]
  */
+
 exports.article = (req, res) => {
-    if (!req.query.id) {
+    var _id = req.query.id || req.body.id
+    if (!_id) {
         res.json({
             code: -200,
             message: '参数错误'
@@ -139,29 +141,26 @@ exports.article = (req, res) => {
     }
     Promise.all([
         Article.findOneAsync({
-            _id: req.query.id,
+            _id,
             is_delete: 0
         }),
         Article.findOne({
             is_delete: 0
-        }).where('_id').gt(req.query.id).sort('_id').exec(),
+        }).where('_id').gt(_id).sort('_id').exec(),
         Article.findOne({
             is_delete: 0
-        }).where('_id').lt(req.query.id).sort('-_id').exec()
+        }).where('_id').lt(_id).sort('-_id').exec()
     ]).then(value => {
-        var next, prev
-        if (value[1]) {
-            next = {
-                next_id: value[1]._id,
-                next_title: value[1].title
-            }
+        var next = {
+            next_id: value[1] ? value[1]._id : '',
+            next_title: value[1] ? value[1].title : ''
         }
-        if (value[2]) {
-            prev = {
-                prev_id: value[2]._id,
-                prev_title: value[2].title
-            }
+
+        var prev = {
+            prev_id: value[2] ? value[2]._id : '',
+            prev_title: value[2] ? value[2].title : ''
         }
+
         var json = {
             code: 200,
             data: value[0],

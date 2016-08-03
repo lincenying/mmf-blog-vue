@@ -1,5 +1,9 @@
 # mmf-blog
 
+demo: [http://www.mmxiaowu.com](http://www.mmxiaowu.com)
+
+react版: [https://github.com/lincenying/mmf-blog-react](https://github.com/lincenying/mmf-blog-react)
+
 安装nodejs, MongoDB, 并启动
 ```
 // 安装依赖
