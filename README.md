@@ -27,21 +27,8 @@ http://localhost:3000/admin
 http://localhost:3000/login
 
 #### 使用开发模式访问:
-
-添加管理员
-http://localhost:8000/admin
+首页
+http://localhost:8080
 
 登录
-http://localhost:8000/login
-
-
-# 注意:
-如果打开上面的页面出现找不到jquery的情况, 请把build/build.js文件中的
-
-`cp('-R', 'static/', assetsPath)`
-
-改成
-
-`cp('-R', 'static/*', assetsPath)`
-
-然后重新运行`npm run build`
+http://localhost:8080/login.html
