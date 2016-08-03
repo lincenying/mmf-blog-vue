@@ -11,24 +11,6 @@ var article = require('../api/article'),
 router.get('/', (req, res) => {
     res.render('index.html', { title: '首页' })
 })
-router.get('/category/:id', (req, res) => {
-    res.render('index.html', { title: '首页' })
-})
-router.get('/search/:qs', (req, res) => {
-    res.render('index.html', { title: '首页' })
-})
-router.get('/article/:id', (req, res) => {
-    res.render('index.html', { title: '首页' })
-})
-router.get('/list/:page', (req, res) => {
-    res.render('index.html', { title: '首页' })
-})
-router.get('/post', (req, res) => {
-    res.render('index.html', { title: '首页' })
-})
-router.get('/edit/:id/:page', (req, res) => {
-    res.render('index.html', { title: '首页' })
-})
 
 // 登录页
 router.get('/login', (req, res) => {
@@ -38,6 +20,10 @@ router.get('/login', (req, res) => {
 // 添加管理员
 router.get('/admin', (req, res) => {
     user.insertUser(req, res)
+})
+
+router.get('*', (req, res) => {
+    res.render('index.html', { title: '首页' })
 })
 
 // API
