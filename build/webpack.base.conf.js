@@ -2,7 +2,7 @@
 
 var path = require('path')
 var webpack = require('webpack')
-var config = process.env.NODE_ENV === 'production' ? require('../config') : require('../config_dev')
+var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 
