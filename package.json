@@ -2,12 +2,11 @@
   "name": "mmf-blog-vue",
   "version": "1.0.0",
   "description": "mmf-blog Vue版 (vuejs, vue-router, vuex)",
-  "author": "景天 &lt;jingtian@naitang.com&gt;",
-  "private": true,
+  "author": "lincenying &lt;lincenying.com&gt;",
+  "license": "MIT",
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "server": "node server.js"
+    "build": "node build/build.js"
   },
   "dependencies": {
     "core-js": "^2.4.1",
