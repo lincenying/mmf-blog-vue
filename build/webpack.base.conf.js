@@ -75,7 +75,6 @@ module.exports = {
         autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')})
     ],
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
