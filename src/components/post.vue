@@ -20,7 +20,7 @@
                     <section id="post-submit">
                         <input type="hidden" name="action" value="post">
                         <button @click="onSubmit" class="btn btn-success">发布</button>
-                        <button @click="handleLoadData" type="button" class="btn btn-success">加载草稿</button>
+                        <button v-if="lsData" @click="handleLoadData" type="button" class="btn btn-success">加载草稿</button>
                     </section>
                 </ajax-form>
             </validator>
