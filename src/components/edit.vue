@@ -106,7 +106,7 @@
                         width: "100%",
                         height: 500,
                         placeholder: '请输入内容...',
-                        path: './static/editor.md/lib/',
+                        path: '/static/editor.md/lib/',
                         toolbarIcons() {
                             return [
                                 "bold", "italic", "quote", "|",
