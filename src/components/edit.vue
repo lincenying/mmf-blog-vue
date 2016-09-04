@@ -20,6 +20,7 @@
                     <section id="post-submit">
                         <input type="hidden" name="id" :value="id">
                         <button @click="onSubmit" class="btn btn-success">编辑</button>
+                        <button @click="handleLoadData" type="button" class="btn btn-success">加载草稿</button>
                     </section>
                 </ajax-form>
             </validator>
@@ -41,17 +42,26 @@
         components: {
             ajaxForm
         },
+        computed: {
+            curRoute() {
+                return 'ls' + this.$route.path
+            }
+        },
         data () {
             return {
                 id: '',
                 title: '',
                 category: '',
-                content: ''
+                content: '',
+                contentIsChange: 0,
+                lsData: ''
             }
         },
         events: {
             onFormComplete(el, res) {
                 if (res.code === 200) {
+                    this.lsData = ''
+                    ls.set(this.curRoute, '')
                     this.showMsg(res.message, "success")
                     this.$route.router.go({ name: 'adminList', params: { page: this.$route.params.page }})
                 } else {
@@ -70,6 +80,9 @@
                     this.showMsg(msg, 'error')
                     e.preventDefault()
                 }
+            },
+            handleLoadData() {
+                window.modifyEditor.setValue(this.lsData)
             }
         },
         ready() {
@@ -84,8 +97,12 @@
                 this.category = json.data.category
                 this.content = json.data.content
 
+                const self = this // eslint-disable-line
+                const curRoute = this.curRoute
+                if (ls.get(curRoute)) this.lsData = ls.get(curRoute)
+
                 this.$nextTick(() => {
-                    editormd("post-content", {
+                    window.modifyEditor = editormd("post-content", {
                         width: "100%",
                         height: 500,
                         placeholder: '请输入内容...',
@@ -104,7 +121,15 @@
                         saveHTMLToTextarea : true,
                         imageUpload : true,
                         imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                        imageUploadURL : "/api/?action=upload"
+                        imageUploadURL : "/api/?action=upload",
+                        onload() {
+                            this.cm.on('change', () => {
+                                self.contentIsChange = 1
+                            })
+                            this.cm.on('blur', () => {
+                                if (self.contentIsChange === 1 && this.getValue() !== '') ls.set(curRoute, this.getValue())
+                            })
+                        }
                     })
                 })
             })()

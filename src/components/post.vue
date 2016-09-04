@@ -20,6 +20,7 @@
                     <section id="post-submit">
                         <input type="hidden" name="action" value="post">
                         <button @click="onSubmit" class="btn btn-success">发布</button>
+                        <button @click="handleLoadData" type="button" class="btn btn-success">加载草稿</button>
                     </section>
                 </ajax-form>
             </validator>
@@ -28,7 +29,7 @@
 </template>
 
 <script lang="babel">
-    /* global window, editormd, testEditor */
+    /* global window, editormd, postEditor */
     import * as vuexAction from "../store/actions"
     import ajaxForm from './app/ajax-form.vue'
     import ls from 'store2'
@@ -40,20 +41,29 @@
         components: {
             ajaxForm
         },
+        computed: {
+            curRoute() {
+                return 'ls' + this.$route.path
+            }
+        },
         data () {
             return {
                 editors: null,
                 title: '',
                 category: '',
-                content: ''
+                content: '',
+                contentIsChange: 0,
+                lsData: ''
             }
         },
         events: {
             onFormComplete(el, res) {
                 this.showMsg(res.message, res.code === 200 ? "success" : 'error')
                 if (res.code === 200) {
+                    this.lsData = ''
+                    ls.set(this.curRoute, '')
                     $("#article-post").get(0).reset()
-                    testEditor.clear()
+                    postEditor.clear()
                 }
             }
         },
@@ -68,10 +78,16 @@
                     this.showMsg(msg, 'error')
                     e.preventDefault()
                 }
+            },
+            handleLoadData() {
+                postEditor.setValue(this.lsData)
             }
         },
         ready() {
-            window.testEditor = editormd("post-content", {
+            const self = this // eslint-disable-line
+            const curRoute = this.curRoute
+            if (ls.get(curRoute)) this.lsData = ls.get(curRoute)
+            window.postEditor = editormd("post-content", {
                 width: "100%",
                 height: 500,
                 markdown: "",
@@ -90,7 +106,15 @@
                 saveHTMLToTextarea : true,
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/api/?action=upload"
+                imageUploadURL : "/api/?action=upload",
+                onload() {
+                    this.cm.on('change', () => {
+                        self.contentIsChange = 1
+                    })
+                    this.cm.on('blur', () => {
+                        if (this.getValue() !== '' && self.contentIsChange === 1) ls.set(curRoute, this.getValue())
+                    })
+                }
             })
             this.gProgress(100)
         },
