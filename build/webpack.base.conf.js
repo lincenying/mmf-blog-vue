@@ -10,11 +10,10 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
     entry: {
-        polyfill: './src/polyfill',
         app: './src/main.js',
         login: './src/login.js',
         vendor: [
-            'vue', 'vue-router', 'vuex', 'vuex-router-sync', 'vue-validator'
+            'vue', 'vue-router', 'vuex', 'vuex-router-sync', 'vue-validator', './src/polyfill'
         ]
     },
     output: {
