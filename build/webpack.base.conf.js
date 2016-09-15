@@ -39,8 +39,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.vue$/,
-            loader: 'vue',
-            happy: { id: 'vue' }
+            loader: 'vue'
         }, {
             test: /\.js$/,
             loader: 'babel',
@@ -76,7 +75,6 @@ module.exports = {
         autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')})
     ],
     plugins: [
-        new HappyPack({ id: 'vue', threads: 4 }),
         new HappyPack({ id: 'js', threads: 4 }),
         new webpack.ProvidePlugin({
             $: 'jquery',

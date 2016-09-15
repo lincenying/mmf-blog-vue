@@ -21,12 +21,16 @@
 <script lang="babel">
     import marked from 'marked'
     import hljs from 'highlight.js'
+    var renderer = new marked.Renderer()
     marked.setOptions({
         highlight(code) {
             return hljs.highlightAuto(code).value
         },
         breaks: true
     })
+    renderer.link = function( href, title, text ) {
+        return '<a target="_blank" href="'+ href +'" title="' + title + '">' + text + '</a>'
+    }
     export default {
         props: ['item', 'ispc'],
         data () {
@@ -35,7 +39,9 @@
             }
         },
         filters: {
-            marked
+            marked(message) {
+                return marked(message, { renderer })
+            }
         },
         methods: {
             open(e) {
