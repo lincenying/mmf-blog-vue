@@ -52,7 +52,7 @@ module.exports = merge(baseWebpackConfig, {
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             chunks: ['vendor', 'common', 'app'],
-            chunksSortMode: 'none',
+            chunksSortMode: 'dependency',
             filename: process.env.NODE_ENV === 'testing' ? 'index.html' : config.build.index,
             template: 'index.html',
             inject: true,
@@ -64,10 +64,10 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new HtmlWebpackPlugin({
             chunks: ['vendor', 'common', 'login'],
+            chunksSortMode: 'dependency',
             filename: 'login.html',
             template: 'login.html',
             inject: true,
-            chunksSortMode: 'none',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
