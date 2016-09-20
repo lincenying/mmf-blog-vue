@@ -61,13 +61,14 @@ router.map({
 
 sync(store, router)
 
-router.beforeEach(transition => {
+router.beforeEach(({from: {path}, next}) => {
     var scrollTop = document.body.scrollTop
-    if (transition.from.path && scrollTop) {
-        ls.set(transition.from.path, scrollTop)
+    if (path) {
+        if (scrollTop) ls.set(path, scrollTop)
+        if (ls.get(path) && !scrollTop) ls.set(path, 0)
     }
     store.dispatch('GLOBAL_PROGRESS', 0)
-    transition.next()
+    next()
 })
 
 router.start(App, '#app')
