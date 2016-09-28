@@ -14,7 +14,7 @@
             'method' : {
                 type     : String,
                 required : true,
-                validator: function (value) {
+                validator(value) {
                     switch (value.toUpperCase()) {
                         case 'CONNECT':
                             return true
@@ -42,16 +42,16 @@
             'enctype': String
         },
         methods: {
-            handleAjaxFormSubmit: function () {
+            handleAjaxFormSubmit () {
                 this.$dispatch('beforeFormSubmit', this)
-                var handleError = (function (err) {
+                var handleError = err => {
                     this.$dispatch('onFormError', this, err)
-                }).bind(this)
+                }
                 if (!this.method) {
                     this.method = 'post'
                 }
                 var xhr = new XMLHttpRequest()
-                var handleFinish = (function () {
+                var handleFinish = () => {
                     if (xhr.readyState === 4) {
                         if (xhr.status < 400) {
                             this.$dispatch('onFormComplete', this, xhr.response)
@@ -59,22 +59,22 @@
                             this.$dispatch('onFormError', this, xhr.statusText)
                         }
                     }
-                }).bind(this)
-                var handleProgress = (function (evt) {
+                }
+                var handleProgress = evt => {
                     if (evt.lengthComputable) {
-                        evt.percent = (evt.loaded / evt.total) * 100
+                        evt.percent = evt.loaded / evt.total * 100
                         this.$dispatch('onFormProgress', this, evt)
                     }
-                }).bind(this)
+                }
                 xhr.open(this.method, this.action, true)
-                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-                xhr.setRequestHeader('Authorization', 'Basic dGVzdDpwYXNzd2Q=');
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+                xhr.setRequestHeader('Authorization', 'Basic dGVzdDpwYXNzd2Q=')
                 if (this.vResponseType) {
                     xhr.responseType = this.vResponseType
                 } else {
                     xhr.responseType = 'json'
                 }
-                xhr.upload && xhr.upload.addEventListener('progress', handleProgress)
+                if (xhr.upload) xhr.upload.addEventListener('progress', handleProgress)
                 xhr.addEventListener('readystatechange', handleFinish)
                 xhr.addEventListener('error', handleError)
                 xhr.addEventListener('abort', handleError)

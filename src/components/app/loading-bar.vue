@@ -77,20 +77,19 @@
             styling() {
                 if (!this.wait) {
                     return {width: `${this.width}%`}
-                } else {
-                    return {width: `100%`}
                 }
+                return {width: `100%`}
             }
         },
         watch: {
             progress(val, old){
-                if (old == 0 && val > 0) {
+                if (old === 0 && val > 0) {
                     this.$dispatch('loading-bar:started')
                 }
                 if (val > 1 && val < 100) {
                     this.$dispatch('loading-bar:loading')
                 }
-                if (this.progress == 100) {
+                if (this.progress === 100) {
                     this.wait = true
                     this.width = 100
                     setTimeout(() => {
@@ -112,7 +111,7 @@
                     this.width = val
                 }
             },
-            error(val, old){
+            error() {
                 this.progress = 100
                 this.$dispatch('loading-bar:error')
             }

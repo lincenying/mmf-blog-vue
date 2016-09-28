@@ -17,6 +17,9 @@ vue2-template 服务端渲染: [https://github.com/lincenying/mmf-blog-vue2-ssr]
 先安装 api server: https://github.com/lincenying/mmf-blog-api
 
 ```
+// 安装cooking
+npm install cooking-cli -g
+
 // 安装依赖
 npm install
 
@@ -26,9 +29,6 @@ npm run build
 // 开发模式
 npm run dev
 
-或者
-
-npm run start
 ```
 
 首页

@@ -22,14 +22,14 @@
                     title: '',
                     clickClose: true,
                     timeout: 3000,
-                    type: type,
-                    position: position
+                    type,
+                    position
                 })
             }
         },
         watch:{
             'msg':{
-                handler: function (val) {
+                handler(val) {
                     if (val.content !== ''){
                         this.showToastr(val.content, val.type)
                         this.hideMsg()
