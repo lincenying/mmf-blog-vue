@@ -3,6 +3,8 @@
 var path = require('path');
 var cooking = require('cooking');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer')
+var browserslist = require('browserslist')
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var config = {
@@ -39,6 +41,9 @@ var config = {
     assetsPath: 'images',
     urlLoaderLimit: 10000,
     extractCSS: 'css/[name].[contenthash:7].css',
+    postcss: [
+        autoprefixer({ browsers: browserslist('last 2 version, > 0.1%')})
+    ],
     extends: ['vue', 'eslint', 'less', ]
 }
 if (process.env.NODE_ENV === 'production') {
