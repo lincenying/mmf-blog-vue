@@ -2,7 +2,7 @@
     <div class="g-mn">
         <div class="box">
             <validator name="post">
-                <ajax-form id="article-post" action="/api/" method="post">
+                <ajax-form id="article-post" action="/api/admin/article/post" method="post">
                     <section id="post-title">
                         <input v-model="title" v-validate:title="{ required: { rule: true, message: '请输入标题!' } }" type="text" name="title" class="form-control" placeholder="请输入标题">
                     </section>
@@ -18,7 +18,6 @@
                         <textarea v-model="content" v-validate:content="{ editor: { rule: true, message: '请输入内容!' } }" id="editor" name="content" class="form-control hidden" data-autosave="editor-content"></textarea>
                     </section>
                     <section id="post-submit">
-                        <input type="hidden" name="action" value="post">
                         <button @click="onSubmit" class="btn btn-success">发布</button>
                         <button v-if="lsData" @click="handleLoadData" type="button" class="btn btn-success">加载草稿</button>
                     </section>
@@ -31,7 +30,7 @@
 <script lang="babel">
     /* global window, editormd, postEditor */
     import * as vuexAction from "../store/actions"
-    import ajaxForm from './app/ajax-form.vue'
+    import ajaxForm from '../components/app/ajax-form.vue'
     import ls from 'store2'
     import cookies from 'js-cookie'
     export default {

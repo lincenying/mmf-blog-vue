@@ -76,12 +76,11 @@
                 if (this.form.content === '') {
                     this.showMsg('请输入评论内容!', 'error')
                 } else {
-                    var json = await api.getData({
-                        action: 'postComment',
+                    var json = await api.post('frontend/comment/post', {
                         id: this.id,
                         content: this.form.content,
                         username: this.form.username
-                    })
+                    }, false)
                     if (json.code === 200) {
                         this.comments.list.push(json.data)
                         this.form.content = ''

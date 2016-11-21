@@ -2,7 +2,7 @@
     <section class="container">
         <div class="login">
             <h1>后台管理</h1>
-            <ajax-form id="shake-setting" action="/api/?action=login" method="post">
+            <ajax-form id="shake-setting" action="/api/frontend/login" method="post">
                 <p><input v-model="form.username" type="text" name="username" value="" placeholder="请输入用户名"></p>
                 <p><input v-model="form.password" type="password" name="password" value="" placeholder="请输入密码"></p>
                 <p class="remember_me">
@@ -23,7 +23,7 @@
 </template>
 <script lang="babel">
     /* global window */
-    import '../html/css/login.css'
+    import './assets/css/login.css'
     import "../node_modules/vue-toastr/dist/vue-toastr.min.css"
     import * as Action from "./store/actions"
     import ls from 'store2'
@@ -59,7 +59,7 @@
                     this.showMsg("操作成功", "success")
                     ls.set("token", res.data)
                     setTimeout(() => {
-                        window.location.href = "/#!/post"
+                        window.location.href = "/#!/admin/post"
                     }, 1000)
                 } else {
                     this.showMsg(res.message)

@@ -9,11 +9,11 @@ import ls from 'store2'
 
 import App from './App.vue'
 
-import index from './components/index.vue'
-import adminEdit from './components/edit.vue'
-import adminList from './components/list.vue'
-import adminPost from './components/post.vue'
-import article from './components/article.vue'
+import index from './pages/index.vue'
+import article from './pages/article.vue'
+import adminEdit from './pages/admin-edit.vue'
+import adminList from './pages/admin-list.vue'
+import adminPost from './pages/admin-post.vue'
 
 Vue.use(VueRouter)
 Vue.use(vueValidator)
@@ -42,15 +42,15 @@ router.map({
         name: 'article',
         component: article
     },
-    '/list/:page': {
+    '/admin/list/:page': {
         name: 'adminList',
         component: adminList
     },
-    '/post': {
+    '/admin/post': {
         name: 'adminPost',
         component: adminPost
     },
-    '/edit/:id/:page': {
+    '/admin/edit/:id/:page': {
         name: 'adminEdit',
         component: adminEdit
     },

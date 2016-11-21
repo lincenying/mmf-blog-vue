@@ -91,5 +91,4 @@ if (process.env.NODE_ENV === 'production') {
         to: path.join(__dirname, 'dist')
     }]))
 }
-
 module.exports = cooking.resolve()

@@ -36,7 +36,7 @@
     import * as vuexAction from "../store/actions"
     import api from '../api'
     import marked from 'marked'
-    import comment from './comment.vue'
+    import comment from '../components/comment.vue'
     import hljs from 'highlight.js'
     var renderer = new marked.Renderer()
     marked.setOptions({
@@ -75,11 +75,10 @@
         methods: {
             async loadcomment() {
                 var id = this.$route.params.id
-                var json = await api.getData({
-                    action: 'comment',
+                var json = await api.get('frontend/comment/list', {
                     id,
                     page: this.comments.page
-                })
+                }, false)
                 if (this.comments.page === 1) {
                     this.comments.list = [].concat(json.data.list)
                 } else {
@@ -93,8 +92,7 @@
             (async () => {
                 var id = this.$route.params.id
                 this.comments.page = 1
-                var json = await api.getFromConfig({
-                    action: 'article',
+                var json = await api.get('frontend/article', {
                     id
                 })
                 this.article = json.data

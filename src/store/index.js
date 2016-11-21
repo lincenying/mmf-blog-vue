@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import adminArticle from './modules/adminArticle'
+import admin from './modules/admin'
 import article from './modules/article'
 import global from './modules/global'
 
@@ -13,7 +13,7 @@ const debug = false
 export default new Vuex.Store({
     modules: {
         global,
-        adminArticle,
+        admin,
         article
     },
     strict: debug,

@@ -2,9 +2,7 @@
 import store from '../store'
 
 $.ajaxSetup({
-    url: '/api/',
     global: true,
-    type: 'POST',
     dataType: 'json',
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -20,22 +18,32 @@ $(document).ajaxComplete(function() {
 })
 
 export default {
-    getFromConfig(config) {
+    get(url, data, global = true) {
         return new Promise((resolve, reject) => {
-            $.ajax({ data: config }).then(data => {
+            $.ajax({
+                url: '/api/' + url,
+                type: 'get',
+                data,
+                global
+            }).then(data => {
                 resolve(data)
             }, error => {
-                store.dispatch('showMsg', error.responseText || error.statusText)
+                store.dispatch('GLOBAL_SHOWMSG', {content: error.responseText || error.statusText, type: 'error'})
                 reject(error)
             })
         })
     },
-    getData(config) {
+    post(url, data, global = true) {
         return new Promise((resolve, reject) => {
-            $.ajax({ global: false, data: config }).then(data => {
+            $.ajax({
+                url: '/api/' + url,
+                type: 'post',
+                data,
+                global
+            }).then(data => {
                 resolve(data)
             }, error => {
-                store.dispatch('showMsg', error.responseText || error.statusText)
+                store.dispatch('GLOBAL_SHOWMSG', {content: error.responseText || error.statusText, type: 'error'})
                 reject(error)
             })
         })

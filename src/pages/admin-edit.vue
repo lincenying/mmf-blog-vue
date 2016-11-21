@@ -2,7 +2,7 @@
     <div class="g-mn">
         <div class="box">
             <validator name="edit">
-                <ajax-form id="article-post" action="/api/?action=modify" method="post">
+                <ajax-form id="article-post" action="/api/admin/article/modify" method="post">
                     <section id="post-title">
                         <input v-model="title" v-validate:title="{ required: true }" type="text" name="title" class="form-control" placeholder="请输入标题">
                     </section>
@@ -32,7 +32,7 @@
     /* global editormd */
     import * as vuexAction from "../store/actions"
     import api from '../api'
-    import ajaxForm from './app/ajax-form.vue'
+    import ajaxForm from '../components/app/ajax-form.vue'
     import ls from 'store2'
     import cookies from 'js-cookie'
     export default {
@@ -88,8 +88,7 @@
         ready() {
             (async () => {
                 var id = this.$route.params.id
-                var json = await api.getFromConfig({
-                    action: 'getArticle',
+                var json = await api.get('admin/article', {
                     id
                 })
                 this.id = json.data._id

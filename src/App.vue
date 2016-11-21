@@ -28,7 +28,7 @@
     <router-view class="router" transition="fade" transition-mode="out-in"></router-view>
     <div class="g-ft">
         <span class="copy"><span title="Copyright">©</span> <a v-link="{ name: 'index', exact: true, activeClass: 'none'}">M·M·F 小屋</a> 2016.06</span>
-        <span class="beian"><i></i> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=000000000000">浙公网安备 000000000000号</a></span>
+        <span class="beian"><i></i> <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=3301060200xxxx">浙公网安备 3301060200xxxx号</a></span>
     </div>
     <Toaster></Toaster>
     <div class="arrow">
@@ -39,8 +39,8 @@
 </template>
 <script lang="babel">
     import '../static/editor.md/css/editormd.css'
-    import '../html/css/hljs/googlecode.css'
-    import '../html/css/style.css'
+    import './assets/css/hljs/googlecode.css'
+    import './assets/css/style.css'
     import '../node_modules/vue-toastr/dist/vue-toastr.min.css'
     import '../node_modules/nprogress/nprogress.css'
     import store from './store'
@@ -62,7 +62,7 @@
         },
         computed: {
             visit() {
-                return this.$route.name === 'index' || this.$route.name === 'article' || this.$route.name === 'category' || this.$route.name === 'search'
+                return !['list', 'post', 'edit'].includes(this.$route.name)
             }
         },
         methods: {

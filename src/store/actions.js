@@ -19,26 +19,27 @@ export const hideMsg = ({dispatch}) => {
     dispatch(types.GLOBAL_HIDEMSG)
 }
 
-export const getArticleList = ({dispatch, state: {route: { path }}}, config) => {
-    return api.getFromConfig(config).then(({data}) => {
+// 前端 文章列表
+export const getTopics = ({dispatch, state: {route: { path }}}, config) => {
+    return api.get('frontend/topics', config).then(({data}) => {
         dispatch(types.RECEIVE_ARTICLE, data, config.page, path)
     })
 
 }
-export const getAdminArticle = ({dispatch}, config) => {
-    return api.getFromConfig(config).then(({data}) => {
+export const getAdminTopics = ({dispatch}, config) => {
+    return api.get('admin/topics', config).then(({data}) => {
         dispatch(types.RECEIVE_ADMIN_ARTICLE, data)
     })
 }
 
 export const deleteArticle = ({dispatch}, config) => {
-    return api.getFromConfig(config).then(() => {
+    return api.get('admin/article/delete', config).then(() => {
         dispatch(types.DELETE_ARTICLE, config.id)
     })
 }
 
 export const recoverArticle = ({dispatch}, config) => {
-    return api.getFromConfig(config).then(() => {
+    return api.get('admin/article/recover', config).then(() => {
         dispatch(types.RECOVER_ARTICLE, config.id)
     })
 }

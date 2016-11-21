@@ -1,7 +1,7 @@
 <template>
     <div class="g-mn">
         <div class="posts">
-            <index-post v-for="item in article.list" :item="item" :ispc="isPC"></index-post>
+            <index-item v-for="item in article.list" :item="item" :ispc="isPC"></index-item>
         </div>
         <div class="box m-page box-do">
             <div class="w-icon w-icon-2"></div>
@@ -13,8 +13,8 @@
 </template>
 <script lang="babel">
     import * as vuexAction from "../store/actions"
-    import indexPost from './index-post.vue'
-    import { ua, ssp } from '../tools/command'
+    import indexItem from '../components/index-item.vue'
+    import { ua, ssp } from '../utils'
     export default {
         vuex: {
             getters: {
@@ -23,7 +23,7 @@
             actions: vuexAction
         },
         components: {
-            indexPost
+            indexItem
         },
         computed: {
             isPC() {
@@ -34,8 +34,7 @@
             async loadMore(page = this.article.page) {
                 var id = this.$route.params.id || ""
                 var qs = this.$route.params.qs || ""
-                await this.getArticleList({
-                    action: 'getArticleList',
+                await this.getTopics({
                     id,
                     qs,
                     page,

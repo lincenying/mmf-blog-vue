@@ -26,7 +26,7 @@
     export default {
         vuex: {
             getters: {
-                article: ({adminArticle}) => adminArticle.article
+                article: ({admin}) => admin.article
             },
             actions: vuexAction
         },
@@ -45,13 +45,11 @@
             mdel(id) {
                 this.deleteArticle({
                     id,
-                    action: 'delete'
                 })
             },
             recover(id) {
                 this.recoverArticle({
                     id,
-                    action: 'recover'
                 })
             }
         },
@@ -63,7 +61,6 @@
                 }
                 return Promise.all([
                     this.getAdminArticle({
-                        action: 'getAdminArticle',
                         limit: 20,
                         page
                     })
