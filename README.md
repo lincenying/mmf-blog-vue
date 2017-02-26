@@ -1,6 +1,6 @@
 # mmf-blog vuejs 1.0版
 
-demo: [http://vue.mmxiaowu.com](http://vue.mmxiaowu.com)
+demo: [http://old.mmxiaowu.com/](http://old.mmxiaowu.com/)
 
 ---
 
